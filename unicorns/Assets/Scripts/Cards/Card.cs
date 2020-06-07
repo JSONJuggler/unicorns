@@ -8,10 +8,11 @@ namespace unicorn
     public class Card : ScriptableObject
     {
         public CardType cardType;
+        public CardDeck cardDeck;
         public string cardTitle;
         public Sprite cardFront;
         // public string cardType;
-        public string cardDeck;
+        // public string cardDeck;
         public int quantity;
     }
 }
