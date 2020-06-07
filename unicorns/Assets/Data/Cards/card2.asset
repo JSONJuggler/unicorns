@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288b7de4df67249099706b0362c29d5b, type: 3}
   m_Name: card2
   m_EditorClassIdentifier: 
-  cardTitle: 
-  cardFront: {fileID: 0}
-  cardType: 
-  cardDeck: 
-  quantity: 0
+  cardType: {fileID: 11400000, guid: 99fde7f6e1add4838a8855fee3616e93, type: 2}
+  cardDeck: {fileID: 11400000, guid: 4e5780e8855c543f38fe8a4ae964e52f, type: 2}
+  cardTitle: sacrificial lambicorn
+  cardFront: {fileID: 21300000, guid: 7629ac929cdf4440fb7997c467c72c1c, type: 3}
+  quantity: 2
