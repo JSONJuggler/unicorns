@@ -28,8 +28,11 @@ namespace unicorn
             }
 
             card = c;
+
+            c.cardType.OnSetType(this);
+
             title = c.cardTitle;
-            type = c.cardType;
+            // type = c.cardType;
             deck = c.cardDeck;
             cardFront.sprite = c.cardFront;
             quantity = c.quantity;
