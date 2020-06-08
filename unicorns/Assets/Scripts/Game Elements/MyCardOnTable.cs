@@ -15,7 +15,7 @@ namespace unicorn.GameElements
 
         public override void OnHighlight(CardInstance inst)
         {
-
+            Debug.Log("this card has log of being mines and on the table");
         }
     }
 }

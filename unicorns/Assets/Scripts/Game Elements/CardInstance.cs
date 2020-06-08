@@ -19,6 +19,7 @@ namespace unicorn
         {
             if (currentLogic == null)
                 return;
+            Debug.Log("this card has logic");
             currentLogic.OnHighlight(this);
         }
     }
