@@ -1476,6 +1476,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1994,6 +2000,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2973,6 +2985,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3104,7 +3122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &716347186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3430,6 +3448,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4046,6 +4070,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4463,6 +4493,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033ce1da80af3455c934ff160a9d01c1, type: 3}
+--- !u!1 &972122352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972122354}
+  - component: {fileID: 972122353}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &972122353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972122352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ce32c8dc3e14ff7a37dabf639500d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: acad2e8aee0ca4c08aa49ab14cbf234b, type: 2}
+--- !u!4 &972122354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972122352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.30824578, y: 0.50582975, z: 5.625657}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &993945349
 GameObject:
   m_ObjectHideFlags: 0
@@ -5227,50 +5301,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251949943}
   m_CullTransparentMesh: 0
---- !u!1 &1257935757
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1257935759}
-  - component: {fileID: 1257935758}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1257935758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257935757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9ce32c8dc3e14ff7a37dabf639500d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: acad2e8aee0ca4c08aa49ab14cbf234b, type: 2}
---- !u!4 &1257935759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257935757}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2307839, y: 0.21345128, z: 4.9695516}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1270905876 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
@@ -5289,6 +5319,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5874,6 +5910,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6281,6 +6323,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6519,6 +6567,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6847,7 +6901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1797189898
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7240,6 +7294,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2851580841870746356, guid: 033ce1da80af3455c934ff160a9d01c1,
+        type: 3}
+      propertyPath: currentLogic
+      value: 
+      objectReference: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a,
+        type: 2}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8347,17 +8407,17 @@ PrefabInstance:
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
@@ -8372,7 +8432,7 @@ PrefabInstance:
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
@@ -8382,7 +8442,7 @@ PrefabInstance:
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7329858692119289828, guid: 033ce1da80af3455c934ff160a9d01c1,
         type: 3}

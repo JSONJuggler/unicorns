@@ -6,16 +6,20 @@ namespace unicorn
 {
     public class CardInstance : MonoBehaviour, IClickable
     {
+        public unicorn.GameElements.GE_Logic currentLogic;
+
         public void OnClick()
         {
-            Debug.Log(this.gameObject.name);
+            if (currentLogic == null)
+                return;
+            currentLogic.OnClick(this);
         }
 
         public void OnHighlight()
         {
-            Debug.Log(this.gameObject.name);
-            Vector3 s = Vector3.one * 2;
-            this.transform.localScale = s;
+            if (currentLogic == null)
+                return;
+            currentLogic.OnHighlight(this);
         }
     }
 }

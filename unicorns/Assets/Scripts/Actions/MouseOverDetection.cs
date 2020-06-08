@@ -18,9 +18,11 @@ namespace unicorn.GameStates
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
 
+            IClickable c = null;
+
             foreach (RaycastResult r in results)
             {
-                IClickable c = r.gameObject.GetComponentInParent<IClickable>();
+                c = r.gameObject.GetComponentInParent<IClickable>();
                 if (c != null)
                 {
                     c.OnHighlight();
