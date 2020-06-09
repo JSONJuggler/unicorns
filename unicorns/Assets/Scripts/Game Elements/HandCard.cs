@@ -9,12 +9,12 @@ namespace unicorn.GameElements
     {
         public override void OnClick(CardInstance inst)
         {
-            Debug.Log("this card is on my hand");
+            // Debug.Log("this card is on my hand");
         }
 
         public override void OnHighlight(CardInstance inst)
         {
-            Debug.Log("this card has the logic of being in my hand");
+            // Debug.Log("this card has the logic of being in my hand");
         }
     }
 }
