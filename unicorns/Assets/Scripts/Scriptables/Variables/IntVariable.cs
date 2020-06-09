@@ -16,13 +16,13 @@ namespace SO
 
         public void Set(NumberVariable v)
         {
-            if(v is FloatVariable)
+            if (v is FloatVariable)
             {
                 FloatVariable f = (FloatVariable)v;
                 value = Mathf.RoundToInt(f.value);
             }
 
-            if(v is IntVariable)
+            if (v is IntVariable)
             {
                 IntVariable i = (IntVariable)v;
                 value = i.value;
@@ -33,7 +33,7 @@ namespace SO
         {
             value += v;
         }
-        
+
         public void Add(NumberVariable v)
         {
             if (v is FloatVariable)
