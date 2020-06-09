@@ -10,13 +10,7 @@ namespace unicorn.GameStates
     {
         public override void Execute(float d)
         {
-            PointerEventData pointerData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
-
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerData, results);
+            List<RaycastResult> results = Settings.GetUIObjs();
 
             IClickable c = null;
 
