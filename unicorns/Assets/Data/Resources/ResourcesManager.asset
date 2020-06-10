@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 963928bcb57d94fd29134d354b3974ee, type: 3}
-  m_Name: PlayerUnicornsGridTransform
+  m_Script: {fileID: 11500000, guid: 192c4c6b979e04db8bb49c24aac4ed9b, type: 3}
+  m_Name: ResourcesManager
   m_EditorClassIdentifier: 
-  value: {fileID: 0}
+  allCards:
+  - {fileID: 11400000, guid: 95de855d9e6c84614a5f8949b555e305, type: 2}
+  - {fileID: 11400000, guid: a72f252dd6bf14194a82aa97d7628d21, type: 2}

@@ -5,19 +5,20 @@ using UnityEngine.EventSystems;
 
 namespace unicorn
 {
-    public class Settings
+    public static class Settings
     {
         public static GameManager gameManager;
 
-        public static ResourcesManager _resourcesManager;
+        private static ResourcesManager _resourcesManager;
 
         public static ResourcesManager GetResourcesManager()
         {
             if (_resourcesManager == null)
             {
                 _resourcesManager = Resources.Load("ResourcesManager") as ResourcesManager;
-            }
+                _resourcesManager.Init();
 
+            }
             return _resourcesManager;
         }
 
@@ -31,6 +32,14 @@ namespace unicorn
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
             return results;
+        }
+
+        public static void SetParentForCard(Transform c, Transform p)
+        {
+            c.SetParent(p);
+            c.localPosition = Vector3.zero;
+            c.localEulerAngles = Vector3.zero;
+            c.localScale = Vector3.one;
         }
     }
 }

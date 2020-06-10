@@ -8,17 +8,11 @@ namespace unicorn
     public class CardViz : MonoBehaviour
     {
         public string title;
-        public string type;
-        public string deck;
         public Image cardFront;
+        public Image cardBack;
         public int quantity;
 
         public Card card;
-
-        private void Start()
-        {
-            LoadCard(card);
-        }
 
         public void LoadCard(Card c)
         {
@@ -33,9 +27,8 @@ namespace unicorn
             c.cardDeck.OnSetType(this);
 
             title = c.cardTitle;
-            // type = c.cardType;
-            // deck = c.cardDeck;
             cardFront.sprite = c.cardFront;
+            cardBack.sprite = c.cardBack;
             quantity = c.quantity;
 
         }

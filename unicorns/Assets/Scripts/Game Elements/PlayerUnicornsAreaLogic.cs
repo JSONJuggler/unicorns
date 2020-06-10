@@ -21,10 +21,7 @@ namespace unicorn
             {
                 Debug.Log("Placing card down");
 
-                card.value.transform.SetParent(areaGrid.value.transform);
-                card.value.transform.localPosition = Vector3.zero;
-                card.value.transform.localScale = Vector3.one;
-                card.value.transform.localEulerAngles = Vector3.zero;
+                Settings.SetParentForCard(card.value.transform, areaGrid.value.transform);
                 card.value.gameObject.SetActive(true);
                 card.value.currentLogic = cardDownLogic;
                 //Place card down

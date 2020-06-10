@@ -126,9 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: 
-  type: 
-  deck: 
   cardFront: {fileID: 2545220703390993119}
+  cardBack: {fileID: 2545220703786620843}
   quantity: 0
   card: {fileID: 11400000, guid: a72f252dd6bf14194a82aa97d7628d21, type: 2}
 --- !u!114 &2851580841870746356
@@ -209,7 +208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d02e3a55f8e148d0a0cef14a28cc8cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a22bdf2538b1a4980a8fdd266deb4281, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

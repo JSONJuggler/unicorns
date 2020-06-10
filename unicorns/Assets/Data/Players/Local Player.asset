@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e59594dba40e44d7903f4253a091f29, type: 3}
+  m_Name: Local Player
+  m_EditorClassIdentifier: 
+  startingCards:
+  - Card
+  - card2
+  - card2
+  handGrid: {fileID: 11400000, guid: 678a01f3db3be4db89f20189046ed213, type: 2}
+  downGrid: {fileID: 11400000, guid: eeb00be7a5aa54a6f8b4ed427c6c0e95, type: 2}
+  handLogic: {fileID: 11400000, guid: c1fe6dd9e7c4f4ac9b95661218b38e9b, type: 2}
+  downLogic: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a, type: 2}

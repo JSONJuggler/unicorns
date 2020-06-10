@@ -11,8 +11,7 @@ namespace unicorn
         public CardDeck cardDeck;
         public string cardTitle;
         public Sprite cardFront;
-        // public string cardType;
-        // public string cardDeck;
+        public Sprite cardBack;
         public int quantity;
     }
 }
