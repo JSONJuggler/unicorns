@@ -2383,7 +2383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9206e12fbb84759a727fd1807471cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformVariable: {fileID: 11400000, guid: eeb00be7a5aa54a6f8b4ed427c6c0e95, type: 2}
+  transformVariable: {fileID: 11400000, guid: bc08989da91594496bd63a531dc67333, type: 2}
 --- !u!1 &796392323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,9 +2855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ce32c8dc3e14ff7a37dabf639500d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  all_players:
-  - {fileID: 11400000, guid: e34925ccaa5364d9ea39d9c0b1c37731, type: 2}
-  - {fileID: 11400000, guid: 2151e80b79b32460d8b8baca8039b7cd, type: 2}
   currentPlayer: {fileID: 11400000, guid: e34925ccaa5364d9ea39d9c0b1c37731, type: 2}
   playerOneHolder: {fileID: 11400000, guid: 39930c44d22c1460e89f2b4d5bcddbe2, type: 2}
   otherPlayerHolder: {fileID: 11400000, guid: 6288f0d13406b4c9e890298459d3261e, type: 2}
@@ -2867,7 +2864,7 @@ MonoBehaviour:
   turnIndex: 0
   turns:
   - {fileID: 11400000, guid: 081acdb7b03844e5285fe087a5719a60, type: 2}
-  - {fileID: 11400000, guid: 0cb8d5b53eb8a435180821197677063a, type: 2}
+  - {fileID: 11400000, guid: 6e699d648e9844673a10c46094d1ce07, type: 2}
   onTurnChanged: {fileID: 11400000, guid: 943ddb76a3bf04dde8483cd061c2e289, type: 2}
   onPhaseChanged: {fileID: 11400000, guid: 5b4802a8a502840208d8aa4818e79352, type: 2}
   turnText: {fileID: 11400000, guid: 1ca6d193303f54f2699b07063e285b44, type: 2}

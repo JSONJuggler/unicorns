@@ -7,6 +7,7 @@ namespace unicorn
 {
     public class GameManager : MonoBehaviour
     {
+        [System.NonSerialized]
         public PlayerHolder[] all_players;
         public PlayerHolder currentPlayer;
         public CardHolders playerOneHolder;
@@ -19,6 +20,21 @@ namespace unicorn
         public SO.GameEvent onTurnChanged;
         public SO.GameEvent onPhaseChanged;
         public SO.StringVariable turnText;
+
+        public static GameManager singleton;
+
+        public void Awake()
+        {
+            singleton = this;
+
+            all_players = new PlayerHolder[turns.Length];
+            for (int i = 0; i < turns.Length; i++)
+            {
+                all_players[i] = turns[i].player;
+            }
+
+            currentPlayer = turns[0].player;
+        }
 
         private void Start()
         {
@@ -34,15 +50,26 @@ namespace unicorn
 
         void SetupPlayers()
         {
-            foreach (PlayerHolder p in all_players)
+            for (int i = 0; i < all_players.Length; i++)
             {
-                if (p.isHumanPlayer)
+
+                // if (all_players[i].isHumanPlayer)
+                // {
+                //     all_players[i].currentHolder = playerOneHolder;
+                // }
+                // else
+                // {
+                //     all_players[i].currentHolder = otherPlayerHolder;
+                // }
+
+                // this will only work with two players btq
+                if (i == 0)
                 {
-                    p.currentHolder = playerOneHolder;
+                    all_players[i].currentHolder = playerOneHolder;
                 }
                 else
                 {
-                    p.currentHolder = otherPlayerHolder;
+                    all_players[i].currentHolder = otherPlayerHolder;
                 }
             }
         }
@@ -61,9 +88,26 @@ namespace unicorn
                     CardInstance inst = go.GetComponent<CardInstance>();
                     inst.currentLogic = all_players[p].handLogic;
                     Settings.SetParentForCard(go.transform, all_players[p].currentHolder.handGrid.value);
-                    // all_players[p].handCards.Add(inst);
+                    all_players[p].handCards.Add(inst);
                 }
+
+                all_players[p].currentHolder.LoadPlayer(all_players[p]);
             }
+        }
+
+        public void LoadPlayerOnActive(PlayerHolder p)
+        {
+            if (playerOneHolder.playerHolder != p)
+            {
+                PlayerHolder prevPlayer = playerOneHolder.playerHolder;
+                LoadPlayerOnHolder(prevPlayer, otherPlayerHolder);
+                LoadPlayerOnHolder(p, playerOneHolder);
+            }
+        }
+
+        public void LoadPlayerOnHolder(PlayerHolder p, CardHolders h)
+        {
+            h.LoadPlayer(p);
         }
 
         // public bool switchPlayer;
@@ -87,6 +131,9 @@ namespace unicorn
                     turnIndex = 0;
                 }
 
+                // the current player has changed here
+                currentPlayer = turns[turnIndex].player;
+                turns[turnIndex].OnTurnStart();
                 turnText.value = turns[turnIndex].player.username;
                 onTurnChanged.Raise();
             }

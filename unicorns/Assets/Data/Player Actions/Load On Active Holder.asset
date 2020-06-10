@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066b868074cff47108bf83014966389d, type: 3}
-  m_Name: Enemy Card Holders
+  m_Script: {fileID: 11500000, guid: 1d7ab0d01680745e3b9670b1d14d9e1c, type: 3}
+  m_Name: Load On Active Holder
   m_EditorClassIdentifier: 
-  handGrid: {fileID: 11400000, guid: 10aa53d51b5264789b2d9a1db2279f8d, type: 2}
-  downGrid: {fileID: 11400000, guid: 4924ec424f6e44d03aae2f21aff7ab94, type: 2}

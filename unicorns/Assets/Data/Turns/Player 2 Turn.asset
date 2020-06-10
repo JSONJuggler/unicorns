@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 304c952d76da1442aaf79d3b37fe59c3, type: 3}
-  m_Name: Players Turn
+  m_Name: Player 2 Turn
   m_EditorClassIdentifier: 
-  player: {fileID: 11400000, guid: e34925ccaa5364d9ea39d9c0b1c37731, type: 2}
+  player: {fileID: 11400000, guid: 73d13d24d77f045d6ad1c52faf54a8db, type: 2}
   currentPhase: {fileID: 11400000, guid: c43ac71f0ed9d4a92b34b7c343fc1c71, type: 2}
   phases:
   - {fileID: 11400000, guid: ef04efbc9129b4a428be6f55fd5b7d2a, type: 2}
   - {fileID: 11400000, guid: 840a6e863f26e40eb8ae5dd56cdadd61, type: 2}
+  turnStartActions:
+  - {fileID: 11400000, guid: 991d7243442c9490bb66e97e86d74e50, type: 2}
