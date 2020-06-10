@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02fec8d941b647a8af42ee3ab1fe0a1, type: 3}
+  m_Name: Player Unicorns Area Logic
+  m_EditorClassIdentifier: 
+  card: {fileID: 11400000, guid: 77f9ceb38902e4c7d898894e8e8f91da, type: 2}
+  magicalUnicornType: {fileID: 11400000, guid: 99fde7f6e1add4838a8855fee3616e93, type: 2}
+  areaGrid: {fileID: 11400000, guid: 678a01f3db3be4db89f20189046ed213, type: 2}
+  cardDownLogic: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a, type: 2}

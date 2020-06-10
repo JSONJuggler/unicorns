@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847cdd3f814d0404191ce9f39066e87a, type: 3}
   m_Name: Mouse Hold With Card
   m_EditorClassIdentifier: 
+  currentCard: {fileID: 11400000, guid: 77f9ceb38902e4c7d898894e8e8f91da, type: 2}
   playerControlState: {fileID: 11400000, guid: acad2e8aee0ca4c08aa49ab14cbf234b, type: 2}
   onPlayerControlState: {fileID: 11400000, guid: 302e2fe715f5c4881beb9ea709ac0856,
     type: 2}
