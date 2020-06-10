@@ -19,12 +19,16 @@ namespace unicorn
 
             if (card.value.viz.card.cardType == magicalUnicornType)
             {
+                // bool canUse = Settings.gameManager.currentPlayer.CanUseCard(card.value.viz.card);
+                // if (canUse)
+                // {
                 Debug.Log("Placing card down");
 
-                Settings.SetParentForCard(card.value.transform, areaGrid.value.transform);
-                card.value.gameObject.SetActive(true);
+                Settings.DropCard(card.value.transform, areaGrid.value.transform, card.value);
                 card.value.currentLogic = cardDownLogic;
-                //Place card down
+                // }
+
+                card.value.gameObject.SetActive(true);
             }
         }
     }

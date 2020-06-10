@@ -34,6 +34,12 @@ namespace unicorn
             return results;
         }
 
+        public static void DropCard(Transform c, Transform p, CardInstance cardInst)
+        {
+            SetParentForCard(c, p);
+            gameManager.currentPlayer.DropCard(cardInst);
+        }
+
         public static void SetParentForCard(Transform c, Transform p)
         {
             c.SetParent(p);

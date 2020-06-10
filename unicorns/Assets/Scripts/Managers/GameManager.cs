@@ -8,6 +8,7 @@ namespace unicorn
     public class GameManager : MonoBehaviour
     {
         public PlayerHolder[] all_players;
+        public PlayerHolder currentPlayer;
         public CardHolders playerOneHolder;
         public CardHolders otherPlayerHolder;
         public State currentState;
@@ -27,7 +28,7 @@ namespace unicorn
 
             CreateStartingCards();
 
-            turnText.value = turns[turnIndex].turnName;
+            turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
         }
 
@@ -65,7 +66,7 @@ namespace unicorn
             }
         }
 
-        public bool switchPlayer;
+        // public bool switchPlayer;
 
         private void Update()
         {
@@ -86,7 +87,7 @@ namespace unicorn
                     turnIndex = 0;
                 }
 
-                turnText.value = turns[turnIndex].turnName;
+                turnText.value = turns[turnIndex].player.username;
                 onTurnChanged.Raise();
             }
 

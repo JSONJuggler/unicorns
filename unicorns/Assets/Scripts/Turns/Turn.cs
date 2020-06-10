@@ -7,7 +7,7 @@ namespace unicorn
     [CreateAssetMenu(menuName = "Turns/Turn")]
     public class Turn : ScriptableObject
     {
-        public string turnName;
+        public PlayerHolder player;
         [System.NonSerialized]
         public int index = 0;
         public PhaseVariable currentPhase;
