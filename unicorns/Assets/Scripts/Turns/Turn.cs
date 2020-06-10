@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace unicorn
     public class Turn : ScriptableObject
     {
         [System.NonSerialized]
-        public int index;
+        public int index = 0;
         public Phase[] phases;
 
         public bool Execute()
