@@ -36,5 +36,11 @@ namespace unicorn
             }
             return result;
         }
+
+        public void EndCurrentPhase()
+        {
+            phases[index].forceExit = true;
+
+        }
     }
 }

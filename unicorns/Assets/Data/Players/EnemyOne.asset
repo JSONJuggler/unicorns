@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e59594dba40e44d7903f4253a091f29, type: 3}
-  m_Name: Local Player
+  m_Name: EnemyOne
   m_EditorClassIdentifier: 
-  username: Player
+  username: EnemyOne
   startingCards:
   - Card
   - card2
   - card2
-  isHumanPlayer: 1
-  handLogic: {fileID: 11400000, guid: c1fe6dd9e7c4f4ac9b95661218b38e9b, type: 2}
-  downLogic: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a, type: 2}
+  - card2
+  - Card
+  isHumanPlayer: 0
+  handLogic: {fileID: 0}
+  downLogic: {fileID: 0}
