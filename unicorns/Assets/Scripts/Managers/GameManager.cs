@@ -13,11 +13,17 @@ namespace unicorn
 
         public int turnIndex;
         public Turn[] turns;
+        public SO.GameEvent onTurnChanged;
+        public SO.GameEvent onPhaseChanged;
+        public SO.StringVariable turnText;
 
         private void Start()
         {
             Settings.gameManager = this;
             CreateStartingCards();
+
+            turnText.value = turns[turnIndex].turnName;
+            onTurnChanged.Raise();
         }
 
         void CreateStartingCards()
@@ -46,6 +52,9 @@ namespace unicorn
                 {
                     turnIndex = 0;
                 }
+
+                turnText.value = turns[turnIndex].turnName;
+                onTurnChanged.Raise();
             }
 
             if (currentState != null)

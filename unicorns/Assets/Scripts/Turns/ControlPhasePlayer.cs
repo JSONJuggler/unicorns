@@ -34,6 +34,7 @@ namespace unicorn
             if (!isInit)
             {
                 Settings.gameManager.SetState(playerControlState);
+                Settings.gameManager.onPhaseChanged.Raise();
                 isInit = true;
             }
         }
