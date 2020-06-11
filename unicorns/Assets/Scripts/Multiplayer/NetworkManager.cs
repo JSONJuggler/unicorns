@@ -184,9 +184,19 @@ namespace unicorn
                     loggerUpdated.Raise();
 
                     PhotonNetwork.room.IsOpen = false;
-                    // SessionManager.singleton.LoadGameLevel();
+                    PhotonNetwork.Instantiate("MultiplayerManager", Vector3.zero, Quaternion.identity, 0);
                 }
             }
+        }
+
+        public void LoadGameScene()
+        {
+            SessionManager.singleton.LoadGameLevel(OnGameSceneLoaded);
+        }
+
+        void OnGameSceneLoaded()
+        {
+
         }
 
         public override void OnJoinedRoom()

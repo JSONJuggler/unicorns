@@ -26,9 +26,10 @@ namespace unicorn
             }
         }
 
-        public void LoadGameLevel()
+        public void LoadGameLevel(OnSceneLoaded callback)
         {
-            StartCoroutine("Main");
+            onSceneLoaded = callback;
+            StartCoroutine(LoadLevel("Main"));
         }
 
         public void LoadMenu()
