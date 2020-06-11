@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using SO;
 
 namespace unicorn
 {
-    public class NetworkManager : MonoBehaviour
+    public class NetworkManager : Photon.PunBehaviour
     {
         public bool isMaster;
         public static NetworkManager singleton;
@@ -33,9 +35,33 @@ namespace unicorn
         ResourcesManager rm;
         int cardInstIds;
 
+        public StringVariable logger;
+        public GameEvent onConnected;
+        public GameEvent failedToConnect;
+        public GameEvent loggerUpdated;
+        public GameEvent waitingForPlayer;
+
+        public void Start()
+        {
+            PhotonNetwork.autoCleanUpPlayerObjects = false;
+            PhotonNetwork.autoJoinLobby = false;
+            PhotonNetwork.automaticallySyncScene = false;
+            Init();
+        }
+
+        public void Init()
+        {
+            {
+                PhotonNetwork.ConnectUsingSettings("1");
+                logger.value = "Connecting";
+                loggerUpdated.Raise();
+            }
+        }
+
         private void Awake()
         {
-            if (singleton = null)
+
+            if (singleton == null)
             {
                 rm = Resources.Load("ResourcesManager") as ResourcesManager;
                 singleton = this;
@@ -43,11 +69,36 @@ namespace unicorn
             }
             else
             {
+
                 Destroy(this.gameObject);
             }
         }
 
         #region My Calls
+        public void OnPlayGame()
+        {
+            JoinRandomRoom();
+        }
+
+        public void JoinRandomRoom()
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
+
+        public void CreateRoom()
+        {
+            RoomOptions room = new RoomOptions();
+            room.MaxPlayers = 2;
+            PhotonNetwork.CreateRoom(RandomString(256), room, TypedLobby.Default);
+        }
+
+        private System.Random random = new System.Random();
+        public string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefgolkip";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         //Master only
         public void PlayerJoined(int photonId, string[] cards)
         {
@@ -94,6 +145,67 @@ namespace unicorn
         #endregion
 
         #region Photon Callbacks
+        public override void OnConnectedToMaster()
+        {
+            base.OnConnectedToMaster();
+            logger.value = "Connected";
+            onConnected.Raise();
+            loggerUpdated.Raise();
+        }
+
+        public override void OnFailedToConnectToPhoton(DisconnectCause cause)
+        {
+            base.OnFailedToConnectToPhoton(cause);
+            logger.value = "Failed To Connect";
+            failedToConnect.Raise();
+            loggerUpdated.Raise();
+
+        }
+
+        public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
+        {
+            base.OnPhotonRandomJoinFailed(codeAndMsg);
+            CreateRoom();
+        }
+
+        public override void OnCreatedRoom()
+        {
+            base.OnCreatedRoom();
+            isMaster = true;
+        }
+
+        public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+        {
+            if (isMaster)
+            {
+                if (PhotonNetwork.playerList.Length > 1)
+                {
+                    logger.value = "Ready for match";
+                    loggerUpdated.Raise();
+
+                    PhotonNetwork.room.IsOpen = false;
+                    // SessionManager.singleton.LoadGameLevel();
+                }
+            }
+        }
+
+        public override void OnJoinedRoom()
+        {
+            base.OnJoinedRoom();
+            logger.value = "Waiting for another player";
+            loggerUpdated.Raise();
+            waitingForPlayer.Raise();
+        }
+
+        public override void OnDisconnectedFromPhoton()
+        {
+            base.OnDisconnectedFromPhoton();
+        }
+
+        public override void OnLeftRoom()
+        {
+            base.OnLeftRoom();
+        }
         #endregion
 
         #region RPCs
