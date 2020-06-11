@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 77f9ceb38902e4c7d898894e8e8f91da, type: 2}
   magicalUnicornType: {fileID: 11400000, guid: 99fde7f6e1add4838a8855fee3616e93, type: 2}
-  areaGrid: {fileID: 11400000, guid: eeb00be7a5aa54a6f8b4ed427c6c0e95, type: 2}
+  areaGrid: {fileID: 11400000, guid: bc08989da91594496bd63a531dc67333, type: 2}
   cardDownLogic: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a, type: 2}

@@ -19,6 +19,7 @@ namespace unicorn
                 return;
 
             playerHolder = p;
+            p.currentHolder = this;
 
             foreach (CardInstance c in p.cardsDown)
             {

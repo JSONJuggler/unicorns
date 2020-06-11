@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Local Player
   m_EditorClassIdentifier: 
   username: Player
-  startingCards:
-  - Card
-  - card2
-  - card2
   isHumanPlayer: 1
   handLogic: {fileID: 11400000, guid: c1fe6dd9e7c4f4ac9b95661218b38e9b, type: 2}
   downLogic: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a, type: 2}
+  currentHolder: {fileID: 11400000, guid: 39930c44d22c1460e89f2b4d5bcddbe2, type: 2}

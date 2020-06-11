@@ -23,6 +23,11 @@ namespace unicorn
 
         public static GameManager singleton;
 
+        public List<string> startingDeck = new List<string>();
+
+        [System.NonSerialized]
+        public List<string> all_cards = new List<string>();
+
         public void Awake()
         {
             singleton = this;
@@ -40,16 +45,21 @@ namespace unicorn
         {
             Settings.gameManager = this;
 
+            all_cards.AddRange(startingDeck);
+
             SetupPlayers();
 
-            CreateStartingCards();
+            // CreateStartingCards();
 
+            turns[0].OnTurnStart();
             turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
         }
 
         void SetupPlayers()
         {
+            ResourcesManager rm = Settings.GetResourcesManager();
+
             for (int i = 0; i < all_players.Length; i++)
             {
 
@@ -71,38 +81,59 @@ namespace unicorn
                 {
                     all_players[i].currentHolder = otherPlayerHolder;
                 }
+
+                all_players[i].currentHolder.LoadPlayer(all_players[i]);
             }
         }
 
-        void CreateStartingCards()
+        // void CreateStartingCards()
+        // {
+        //     ResourcesManager rm = Settings.GetResourcesManager();
+
+        //     for (int p = 0; p < all_players.Length; p++)
+        //     {
+        //         // for (int i = 0; i < all_players[p].startingCards.Length; i++)
+        //         // {
+        //         // GameObject go = Instantiate(cardPrefab) as GameObject;
+        //         // CardViz v = go.GetComponent<CardViz>();
+        //         // v.LoadCard(rm.GetCardInstance(all_players[p].startingCards[i]));
+        //         // CardInstance inst = go.GetComponent<CardInstance>();
+        //         // inst.currentLogic = all_players[p].handLogic;
+        //         // Settings.SetParentForCard(go.transform, all_players[p].currentHolder.handGrid.value);
+        //         // all_players[p].handCards.Add(inst);
+        //         // }
+
+        //         all_players[p].currentHolder.LoadPlayer(all_players[p]);
+        //     }
+        // }
+
+        public void PickNewCardFromDeck(PlayerHolder p)
         {
+            if (all_cards.Count == 0)
+            {
+                // get all graveyard cards and reshuffle them into a new deck
+                Debug.Log("shuffling deck");
+                return;
+            }
             ResourcesManager rm = Settings.GetResourcesManager();
 
-            for (int p = 0; p < all_players.Length; p++)
-            {
-                for (int i = 0; i < all_players[p].startingCards.Length; i++)
-                {
-                    GameObject go = Instantiate(cardPrefab) as GameObject;
-                    CardViz v = go.GetComponent<CardViz>();
-                    v.LoadCard(rm.GetCardInstance(all_players[p].startingCards[i]));
-                    CardInstance inst = go.GetComponent<CardInstance>();
-                    inst.currentLogic = all_players[p].handLogic;
-                    Settings.SetParentForCard(go.transform, all_players[p].currentHolder.handGrid.value);
-                    all_players[p].handCards.Add(inst);
-                }
+            string cardId = all_cards[0];
+            all_cards.RemoveAt(0);
+            GameObject go = Instantiate(cardPrefab) as GameObject;
+            CardViz v = go.GetComponent<CardViz>();
+            v.LoadCard(rm.GetCardInstance(cardId));
+            CardInstance inst = go.GetComponent<CardInstance>();
+            inst.currentLogic = p.handLogic;
+            Settings.SetParentForCard(go.transform, p.currentHolder.handGrid.value);
+            p.handCards.Add(inst);
 
-                all_players[p].currentHolder.LoadPlayer(all_players[p]);
-            }
         }
 
         public void LoadPlayerOnActive(PlayerHolder p)
         {
-            if (playerOneHolder.playerHolder != p)
-            {
-                PlayerHolder prevPlayer = playerOneHolder.playerHolder;
-                LoadPlayerOnHolder(prevPlayer, otherPlayerHolder);
-                LoadPlayerOnHolder(p, playerOneHolder);
-            }
+            PlayerHolder prevPlayer = playerOneHolder.playerHolder;
+            LoadPlayerOnHolder(prevPlayer, otherPlayerHolder);
+            LoadPlayerOnHolder(p, playerOneHolder);
         }
 
         public void LoadPlayerOnHolder(PlayerHolder p, CardHolders h)

@@ -2868,6 +2868,10 @@ MonoBehaviour:
   onTurnChanged: {fileID: 11400000, guid: 943ddb76a3bf04dde8483cd061c2e289, type: 2}
   onPhaseChanged: {fileID: 11400000, guid: 5b4802a8a502840208d8aa4818e79352, type: 2}
   turnText: {fileID: 11400000, guid: 1ca6d193303f54f2699b07063e285b44, type: 2}
+  startingDeck:
+  - Card
+  - card2
+  - Card
 --- !u!4 &972122354
 Transform:
   m_ObjectHideFlags: 0

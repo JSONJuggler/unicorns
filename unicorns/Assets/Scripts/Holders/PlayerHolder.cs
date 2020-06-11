@@ -9,7 +9,11 @@ namespace unicorn
     public class PlayerHolder : ScriptableObject
     {
         public string username;
-        public string[] startingCards;
+        // public string[] startingCards;
+        // public List<string> myDeck = new List<string>();
+
+        // [System.NonSerialized]
+        // public List<string> all_myDeckCards = new List<string>();
 
         public bool isHumanPlayer;
 
@@ -23,6 +27,11 @@ namespace unicorn
         public List<CardInstance> handCards = new List<CardInstance>();
         [System.NonSerialized]
         public List<CardInstance> cardsDown = new List<CardInstance>();
+
+        // public void Init()
+        // {
+        //     all_myDeckCards.AddRange(myDeck);
+        // }
 
         public void DropCard(CardInstance inst)
         {
