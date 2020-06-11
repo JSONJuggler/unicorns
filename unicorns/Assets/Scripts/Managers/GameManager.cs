@@ -7,6 +7,7 @@ namespace unicorn
 {
     public class GameManager : MonoBehaviour
     {
+        public bool isMultiplayer;
         [System.NonSerialized]
         public PlayerHolder[] all_players;
 
@@ -179,24 +180,66 @@ namespace unicorn
             // }
             bool isComplete = turns[turnIndex].Execute();
 
-            if (isComplete)
+            if (!isMultiplayer)
             {
-                turnIndex++;
-                if (turnIndex > turns.Length - 1)
+                if (isComplete)
                 {
-                    turnIndex = 0;
-                }
+                    turnIndex++;
+                    if (turnIndex > turns.Length - 1)
+                    {
+                        turnIndex = 0;
+                    }
 
-                // the current player has changed here
-                currentPlayer = turns[turnIndex].player;
-                turns[turnIndex].OnTurnStart();
-                turnText.value = turns[turnIndex].player.username;
-                onTurnChanged.Raise();
+                    // the current player has changed here
+                    currentPlayer = turns[turnIndex].player;
+                    turns[turnIndex].OnTurnStart();
+                    turnText.value = turns[turnIndex].player.username;
+                    onTurnChanged.Raise();
+                }
+            }
+            else
+            {
+                if (isComplete)
+                {
+                    MultiplayerManager.singleton.PlayerEndsTurn(currentPlayer.photonId);
+                }
             }
 
             if (currentState != null)
                 currentState.Tick(Time.deltaTime);
+        }
 
+        public int GetNextPlayerID()
+        {
+            int r = turnIndex;
+
+            r++;
+            if (r > turns.Length - 1)
+            {
+                r = 0;
+            }
+
+            return turns[r].player.photonId;
+        }
+
+        int GetPlayerTurnIndex(int photonId)
+        {
+            for (int i = 0; i < turns.Length; i++)
+            {
+                if (turns[i].player.photonId == photonId)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        public void ChangeCurrentTurn(int photonId)
+        {
+            turnIndex = GetPlayerTurnIndex(photonId);
+            currentPlayer = turns[turnIndex].player;
+            turns[turnIndex].OnTurnStart();
+            turnText.value = turns[turnIndex].player.username;
+            onTurnChanged.Raise();
         }
 
         public void SetState(State state)
@@ -206,7 +249,10 @@ namespace unicorn
 
         public void EndCurrentPhase()
         {
-            turns[turnIndex].EndCurrentPhase();
+            if (currentPlayer.isHumanPlayer)
+            {
+                turns[turnIndex].EndCurrentPhase();
+            }
         }
 
         public void PutCardToDiscardPile(CardInstance c)

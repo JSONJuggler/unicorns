@@ -8,7 +8,7 @@ namespace unicorn
 {
     public class NetworkManager : Photon.PunBehaviour
     {
-        public bool isMaster;
+        public static bool isMaster;
         public static NetworkManager singleton;
 
         List<MultiplayerHolder> multiplayerHolders = new List<MultiplayerHolder>();

@@ -16,6 +16,13 @@ namespace unicorn
         public PlayerHolder clientPlayerHolder;
         bool gameStarted;
         public bool countPlayers;
+        GameManager gm
+        {
+            get
+            {
+                return GameManager.singleton;
+            }
+        }
 
         #endregion
 
@@ -56,11 +63,9 @@ namespace unicorn
         }
         #endregion
 
-        #region My Calls
+        #region Starting the Match
         public void StartMatch()
         {
-
-            GameManager gm = GameManager.singleton;
 
             foreach (NetworkPrint p in players)
             {
@@ -78,7 +83,17 @@ namespace unicorn
                 }
             }
 
-            gm.InitGame(1);
+            if (NetworkManager.isMaster)
+            {
+                photonView.RPC("RPC_InitGame", PhotonTargets.All, 1);
+            }
+        }
+
+        [PunRPC]
+        public void RPC_InitGame(int startingPlayer)
+        {
+            gm.isMultiplayer = true;
+            gm.InitGame(startingPlayer);
         }
 
         public void AddPlayer(NetworkPrint n_print)
@@ -99,6 +114,32 @@ namespace unicorn
             }
 
             return null;
+        }
+        #endregion
+
+        #region End Turn
+        public void PlayerEndsTurn(int photonId)
+        {
+            photonView.RPC("RPC_PlayerEndsTurn", PhotonTargets.MasterClient, photonId);
+        }
+
+        [PunRPC]
+        public void RPC_PlayerEndsTurn(int photonId)
+        {
+            if (photonId == gm.currentPlayer.photonId)
+            {
+                if (NetworkManager.isMaster)
+                {
+                    int targetId = gm.GetNextPlayerID();
+                    photonView.RPC("RPC_PlayerStartsTurn", PhotonTargets.All, targetId);
+                }
+            }
+        }
+
+        [PunRPC]
+        public void RPC_PlayerStartsTurn(int photonId)
+        {
+            gm.ChangeCurrentTurn(photonId);
         }
         #endregion
     }
