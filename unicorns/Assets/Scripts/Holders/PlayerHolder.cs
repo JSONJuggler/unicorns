@@ -33,6 +33,15 @@ namespace unicorn
         //     all_myDeckCards.AddRange(myDeck);
         // }
 
+        // public void CardToDiscardPile(CardInstance c)
+        // {
+        //     if (handCards.Contains(c))
+        //         handCards.Remove(currentHolder);
+
+        //     if (cardsDown.Contains(c))
+        //         cardsDown.Remove(currentHolder);
+        // }
+
         public void DropCard(CardInstance inst)
         {
             if (handCards.Contains(inst))

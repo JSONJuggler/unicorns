@@ -21,6 +21,9 @@ namespace unicorn
         public SO.GameEvent onPhaseChanged;
         public SO.StringVariable turnText;
 
+        public SO.TransformVariable discardPile;
+        public List<CardInstance> discardPileCards = new List<CardInstance>();
+
         public static GameManager singleton;
 
         public List<string> startingDeck = new List<string>();
@@ -182,6 +185,19 @@ namespace unicorn
         public void EndCurrentPhase()
         {
             turns[turnIndex].EndCurrentPhase();
+        }
+
+        public void PutCardToDiscardPile(CardInstance c)
+        {
+            discardPileCards.Add(c);
+            c.transform.parent = discardPile.value;
+            Vector3 p = Vector3.zero;
+
+            p.x = discardPileCards.Count * 10;
+            p.z = discardPileCards.Count * 10;
+            c.transform.localPosition = p;
+            c.transform.localRotation = Quaternion.identity;
+            c.transform.localScale = Vector3.one;
         }
     }
 }
