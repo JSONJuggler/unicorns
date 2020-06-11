@@ -21,6 +21,8 @@ namespace unicorn
                 return;
             }
 
+            c.cardViz = this;
+
             card = c;
 
             c.cardType.OnSetType(this);

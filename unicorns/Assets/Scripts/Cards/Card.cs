@@ -7,6 +7,11 @@ namespace unicorn
     [CreateAssetMenu(fileName = "Card", menuName = "Card")]
     public class Card : ScriptableObject
     {
+        [System.NonSerialized]
+        public int instId;
+        [System.NonSerialized]
+        public CardViz cardViz;
+
         public CardType cardType;
         public CardDeck cardDeck;
         public string cardTitle;
