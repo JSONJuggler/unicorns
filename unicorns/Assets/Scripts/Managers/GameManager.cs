@@ -9,7 +9,11 @@ namespace unicorn
     {
         [System.NonSerialized]
         public PlayerHolder[] all_players;
+
         public PlayerHolder currentPlayer;
+
+        public PlayerHolder localPlayer;
+        public PlayerHolder clientPlayer;
         public CardHolders playerOneHolder;
         public CardHolders otherPlayerHolder;
         public State currentState;
@@ -24,6 +28,8 @@ namespace unicorn
         public SO.TransformVariable discardPile;
         public List<CardInstance> discardPileCards = new List<CardInstance>();
 
+        bool isInit;
+
         public static GameManager singleton;
 
         public List<string> startingDeck = new List<string>();
@@ -33,20 +39,33 @@ namespace unicorn
 
         public void Awake()
         {
-            singleton = this;
+            Settings.gameManager = this;
 
+            singleton = this;
+        }
+
+        public void InitGame(int startingPlayer)
+        {
             all_players = new PlayerHolder[turns.Length];
+            Turn[] _turns = new Turn[2];
+
             for (int i = 0; i < turns.Length; i++)
             {
                 all_players[i] = turns[i].player;
+                if (all_players[i].photonId == startingPlayer)
+                {
+                    _turns[0] = turns[i];
+                    // currentPlayer = all_players[i];
+                }
+                else
+                {
+                    _turns[1] = turns[i];
+                }
             }
 
-            currentPlayer = turns[0].player;
-        }
+            turns = _turns;
 
-        private void Start()
-        {
-            Settings.gameManager = this;
+            // currentPlayer = turns[0].player;
 
             all_cards.AddRange(startingDeck);
 
@@ -57,6 +76,7 @@ namespace unicorn
             turns[0].OnTurnStart();
             turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
+            isInit = true;
         }
 
         void SetupPlayers()
@@ -148,6 +168,8 @@ namespace unicorn
 
         private void Update()
         {
+            if (!isInit)
+                return;
             // if (switchPlayer)
             // {
             //     switchPlayer = false;

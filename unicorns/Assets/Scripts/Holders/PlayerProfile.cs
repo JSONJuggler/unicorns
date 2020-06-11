@@ -8,6 +8,5 @@ namespace unicorn
     public class PlayerProfile : ScriptableObject
     {
         public string[] cardIds;
-
     }
 }

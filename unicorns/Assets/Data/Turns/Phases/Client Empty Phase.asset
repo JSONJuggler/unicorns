@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f47a8922ab1a040f498cf148ce610dbf, type: 3}
-  m_Name: PlayerProfile
+  m_Script: {fileID: 11500000, guid: 03d94ce18d5014e1687d6dba4cda1588, type: 3}
+  m_Name: Client Empty Phase
   m_EditorClassIdentifier: 
-  cardIds: []
+  phaseName: 
+  forceExit: 0

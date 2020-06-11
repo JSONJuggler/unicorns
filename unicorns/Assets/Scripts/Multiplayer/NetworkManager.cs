@@ -196,7 +196,7 @@ namespace unicorn
 
         void OnGameSceneLoaded()
         {
-
+            MultiplayerManager.singleton.countPlayers = true;
         }
 
         public override void OnJoinedRoom()

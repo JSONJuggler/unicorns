@@ -15,6 +15,9 @@ namespace unicorn
         // [System.NonSerialized]
         // public List<string> all_myDeckCards = new List<string>();
 
+        [System.NonSerialized]
+        public int photonId = -1;
+
         public bool isHumanPlayer;
 
         public GE_Logic handLogic;
