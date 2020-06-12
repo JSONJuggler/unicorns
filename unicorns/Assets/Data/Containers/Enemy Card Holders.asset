@@ -16,3 +16,6 @@ MonoBehaviour:
   unicornAreaGrid: {fileID: 11400000, guid: 4924ec424f6e44d03aae2f21aff7ab94, type: 2}
   enemyUnicornAreaGrid: {fileID: 11400000, guid: bc08989da91594496bd63a531dc67333,
     type: 2}
+  stableAreaGrid: {fileID: 11400000, guid: 814d503d1fd984c15853aa92c85623db, type: 2}
+  enemystableAreaGrid: {fileID: 11400000, guid: eeb00be7a5aa54a6f8b4ed427c6c0e95,
+    type: 2}

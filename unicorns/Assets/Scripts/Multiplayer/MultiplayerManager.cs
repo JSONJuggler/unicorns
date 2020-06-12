@@ -245,7 +245,7 @@ namespace unicorn
         #region Card Operations
         public enum CardOperation
         {
-            dropMagicalUnicornType, dropMagicalUnicornTypeEnemy, pickCardFromDeck, syncDeck
+            dropMagicalUnicornType, dropMagicalUnicornTypeEnemy, dropStableType, dropStableTypeEnemy, pickCardFromDeck, syncDeck
         }
 
         [PunRPC]
@@ -256,14 +256,26 @@ namespace unicorn
 
             switch (operation)
             {
+                case CardOperation.dropStableType:
+                    Debug.Log("Online Player placing stable down");
+                    Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.stableAreaGrid.value, card.cardPhysicalInst);
+                    card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
+                    card.cardPhysicalInst.gameObject.SetActive(true);
+                    break;
+                case CardOperation.dropStableTypeEnemy:
+                    Debug.Log("Online Player placing enemy stable down");
+                    Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.enemyStableAreaGrid.value, card.cardPhysicalInst);
+                    card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
+                    card.cardPhysicalInst.gameObject.SetActive(true);
+                    break;
                 case CardOperation.dropMagicalUnicornType:
-                    Debug.Log("Online Player placing magical unicorn down");
+                    Debug.Log("Online Player placing unicorn down");
                     Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.unicornAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
                     break;
                 case CardOperation.dropMagicalUnicornTypeEnemy:
-                    Debug.Log("Online Player placing magical unicorn down");
+                    Debug.Log("Online Player placing enemy unicorn down");
                     Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.enemyUnicornAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
@@ -278,12 +290,12 @@ namespace unicorn
                     p.playerHolder.handCards.Add(card.cardPhysicalInst);
                     break;
                 case CardOperation.syncDeck:
-                    Debug.Log("player" + photonId + "drew" + instId);
+                    // Debug.Log("player" + photonId + "drew" + instId);
                     foreach (NetworkPrint player in players)
                     {
                         if (player.photonId != photonId)
                         {
-                            Debug.Log("removing" + instId + "for player" + player.photonId);
+                            // Debug.Log("removing" + instId + "for player" + player.photonId);
                             player.deckCards.RemoveAt(0);
                         }
                     }

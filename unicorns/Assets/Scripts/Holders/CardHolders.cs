@@ -10,6 +10,9 @@ namespace unicorn
         public SO.TransformVariable handGrid;
         public SO.TransformVariable unicornAreaGrid;
         public SO.TransformVariable enemyUnicornAreaGrid;
+        public SO.TransformVariable stableAreaGrid;
+        public SO.TransformVariable enemyStableAreaGrid;
+
 
         [System.NonSerialized]
         public PlayerHolder playerHolder;

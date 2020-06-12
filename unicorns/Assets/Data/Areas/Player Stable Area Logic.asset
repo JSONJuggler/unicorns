@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3efea90cdd8b402688644231d7ef379, type: 3}
+  m_Name: Player Stable Area Logic
+  m_EditorClassIdentifier: 
+  card: {fileID: 11400000, guid: 77f9ceb38902e4c7d898894e8e8f91da, type: 2}
+  upgradeType: {fileID: 11400000, guid: c0484ddb0f8614c2b9e8392390fd245d, type: 2}
+  downgradeType: {fileID: 11400000, guid: c69a1c18f4422485dadd1cdfb955a44a, type: 2}
+  stableAreaGrid: {fileID: 11400000, guid: eeb00be7a5aa54a6f8b4ed427c6c0e95, type: 2}
+  cardDownLogic: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a, type: 2}
