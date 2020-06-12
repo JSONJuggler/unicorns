@@ -250,7 +250,7 @@ namespace unicorn
             {
                 case CardOperation.dropMagicalUnicornType:
                     Debug.Log("Online Player placing magical unicorn down");
-                    Settings.SetParentForCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.unicornAreaGrid.value);
+                    Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.unicornAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
                     break;
