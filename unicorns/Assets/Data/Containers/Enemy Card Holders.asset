@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Enemy Card Holders
   m_EditorClassIdentifier: 
   handGrid: {fileID: 11400000, guid: 10aa53d51b5264789b2d9a1db2279f8d, type: 2}
-  downGrid: {fileID: 11400000, guid: 4924ec424f6e44d03aae2f21aff7ab94, type: 2}
+  unicornAreaGrid: {fileID: 11400000, guid: 4924ec424f6e44d03aae2f21aff7ab94, type: 2}

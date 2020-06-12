@@ -46,4 +46,7 @@ MonoBehaviour:
   - RPC_InitGame
   - RPC_PlayerEndsTurn
   - RPC_PlayerStartsTurn
+  - RPC_PlayerCreatesCard
+  - RPC_PlayerUsesCard
+  - RPC_PlayerWantsToUseCard
   DisableAutoOpenWizard: 1

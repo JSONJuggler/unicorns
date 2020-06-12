@@ -8,10 +8,14 @@ namespace unicorn
     public class ResourcesManager : ScriptableObject
     {
         public Card[] allCards;
+        [System.NonSerialized]
         Dictionary<string, Card> cardsDict = new Dictionary<string, Card>();
+
+        int cardInstIndexes;
 
         public void Init()
         {
+            cardInstIndexes = -1;
             cardsDict.Clear();
             for (int i = 0; i < allCards.Length; i++)
             {
@@ -27,6 +31,8 @@ namespace unicorn
 
             Card newInst = Instantiate(originalCard);
             newInst.name = originalCard.name;
+            newInst.instId = cardInstIndexes;
+            cardInstIndexes++;
             return newInst;
         }
 

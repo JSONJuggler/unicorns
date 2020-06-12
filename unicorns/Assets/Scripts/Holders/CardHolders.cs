@@ -8,7 +8,7 @@ namespace unicorn
     public class CardHolders : ScriptableObject
     {
         public SO.TransformVariable handGrid;
-        public SO.TransformVariable downGrid;
+        public SO.TransformVariable unicornAreaGrid;
 
         [System.NonSerialized]
         public PlayerHolder playerHolder;
@@ -23,7 +23,7 @@ namespace unicorn
 
             foreach (CardInstance c in p.cardsDown)
             {
-                Settings.SetParentForCard(c.viz.gameObject.transform, downGrid.value.transform);
+                Settings.SetParentForCard(c.viz.gameObject.transform, unicornAreaGrid.value.transform);
             }
 
             foreach (CardInstance c in p.handCards)

@@ -43,6 +43,7 @@ namespace unicorn
 
         public void Start()
         {
+            rm.Init();
             PhotonNetwork.autoCleanUpPlayerObjects = false;
             PhotonNetwork.autoJoinLobby = false;
             PhotonNetwork.automaticallySyncScene = false;
@@ -125,23 +126,23 @@ namespace unicorn
             return card;
         }
 
-        void CreateCardClient_call(string cardId, int instId, int photonId)
-        {
-            Card c = CreateCardClient(cardId, instId);
-            if (c != null)
-            {
-                MultiplayerHolder h = GetHolder(photonId);
-                h.RegisterCard(c);
-            }
-        }
+        // void CreateCardClient_call(string cardId, int instId, int photonId)
+        // {
+        //     Card c = CreateCardClient(cardId, instId);
+        //     if (c != null)
+        //     {
+        //         MultiplayerHolder h = GetHolder(photonId);
+        //         h.RegisterCard(c);
+        //     }
+        // }
 
-        Card CreateCardClient(string cardId, int instId)
-        {
-            Card card = rm.GetCardInstance(cardId);
-            card.instId = instId;
+        // Card CreateCardClient(string cardId, int instId)
+        // {
+        //     Card card = rm.GetCardInstance(cardId);
+        //     card.instId = instId;
 
-            return card;
-        }
+        //     return card;
+        // }
         #endregion
 
         #region Photon Callbacks

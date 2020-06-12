@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47a8922ab1a040f498cf148ce610dbf, type: 3}
   m_Name: PlayerProfile
   m_EditorClassIdentifier: 
-  cardIds: []
+  cardIds:
+  - Card
+  - card2
+  - card2
+  - card2

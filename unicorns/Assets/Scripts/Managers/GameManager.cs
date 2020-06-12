@@ -7,6 +7,7 @@ namespace unicorn
 {
     public class GameManager : MonoBehaviour
     {
+        public ResourcesManager resourcesManager;
         public bool isMultiplayer;
         [System.NonSerialized]
         public PlayerHolder[] all_players;
@@ -133,24 +134,7 @@ namespace unicorn
 
         public void PickNewCardFromDeck(PlayerHolder p)
         {
-            if (all_cards.Count == 0)
-            {
-                // get all graveyard cards and reshuffle them into a new deck
-                Debug.Log("shuffling deck");
-                return;
-            }
-            ResourcesManager rm = Settings.GetResourcesManager();
-
-            string cardId = all_cards[0];
-            all_cards.RemoveAt(0);
-            GameObject go = Instantiate(cardPrefab) as GameObject;
-            CardViz v = go.GetComponent<CardViz>();
-            v.LoadCard(rm.GetCardInstance(cardId));
-            CardInstance inst = go.GetComponent<CardInstance>();
-            inst.currentLogic = p.handLogic;
-            Settings.SetParentForCard(go.transform, p.currentHolder.handGrid.value);
-            p.handCards.Add(inst);
-
+            MultiplayerManager.singleton.PlayerPicksCardFromDeck(p);
         }
 
         public void LoadPlayerOnActive(PlayerHolder p)

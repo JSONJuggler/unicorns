@@ -71,5 +71,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5903f67845ead4579a00ba65618250b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPlayerHolder: {fileID: 11400000, guid: e34925ccaa5364d9ea39d9c0b1c37731, type: 2}
-  clientPlayerHolder: {fileID: 11400000, guid: dc70ec90d696548d39e3a266e5e4b3b4, type: 2}
+  dataHolder: {fileID: 11400000, guid: 7801975b854cc46979fac4186c7d3a7d, type: 2}
+  countPlayers: 0

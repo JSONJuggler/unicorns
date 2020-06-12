@@ -11,6 +11,8 @@ namespace unicorn
         public int instId;
         [System.NonSerialized]
         public CardViz cardViz;
+        [System.NonSerialized]
+        public CardInstance cardPhysicalInst;
 
         public CardType cardType;
         public CardDeck cardDeck;

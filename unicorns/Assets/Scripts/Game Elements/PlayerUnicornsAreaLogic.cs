@@ -9,7 +9,7 @@ namespace unicorn
     {
         public CardVariable card;
         public CardType magicalUnicornType;
-        public SO.TransformVariable areaGrid;
+        public SO.TransformVariable unicornAreaGrid;
         public GameElements.GE_Logic cardDownLogic;
 
         public override void Execute()
@@ -19,16 +19,17 @@ namespace unicorn
 
             if (card.value.viz.card.cardType == magicalUnicornType)
             {
+                MultiplayerManager.singleton.PlayerWantsToUseCard(card.value.viz.card.instId, GameManager.singleton.localPlayer.photonId, MultiplayerManager.CardOperation.dropMagicalUnicornType);
                 // bool canUse = Settings.gameManager.currentPlayer.CanUseCard(card.value.viz.card);
                 // if (canUse)
                 // {
-                Debug.Log("Placing card down");
+                // Debug.Log("Placing card down");
 
-                Settings.DropCard(card.value.transform, areaGrid.value.transform, card.value);
-                card.value.currentLogic = cardDownLogic;
+                // Settings.DropCard(card.value.transform, unicornAreaGrid.value.transform, card.value);
+                // card.value.currentLogic = cardDownLogic;
                 // }
 
-                card.value.gameObject.SetActive(true);
+                // card.value.gameObject.SetActive(true);
             }
         }
     }

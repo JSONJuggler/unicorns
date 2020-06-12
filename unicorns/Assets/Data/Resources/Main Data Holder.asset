@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b02fec8d941b647a8af42ee3ab1fe0a1, type: 3}
-  m_Name: Player Unicorns Area Logic
+  m_Script: {fileID: 11500000, guid: a9de52c9cca984d08905b7c1eecc4aed, type: 3}
+  m_Name: Main Data Holder
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 77f9ceb38902e4c7d898894e8e8f91da, type: 2}
-  magicalUnicornType: {fileID: 11400000, guid: 99fde7f6e1add4838a8855fee3616e93, type: 2}
-  unicornAreaGrid: {fileID: 11400000, guid: bc08989da91594496bd63a531dc67333, type: 2}
+  handLogic: {fileID: 11400000, guid: c1fe6dd9e7c4f4ac9b95661218b38e9b, type: 2}
   cardDownLogic: {fileID: 11400000, guid: 541a4df112423401db45660c4456117a, type: 2}
+  cardPrefab: {fileID: 1191195586629951520, guid: 033ce1da80af3455c934ff160a9d01c1,
+    type: 3}

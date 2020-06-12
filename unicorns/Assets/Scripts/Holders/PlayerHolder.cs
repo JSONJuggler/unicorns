@@ -30,6 +30,12 @@ namespace unicorn
         public List<CardInstance> handCards = new List<CardInstance>();
         [System.NonSerialized]
         public List<CardInstance> cardsDown = new List<CardInstance>();
+        [System.NonSerialized]
+        public List<int> cardInstIds = new List<int>();
+
+        // public List<Card> allCardInstances = new List<Card>();
+
+        // local multiplayer player init for a players deck of cards
 
         // public void Init()
         // {
