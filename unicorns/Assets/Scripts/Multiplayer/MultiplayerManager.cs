@@ -57,8 +57,10 @@ namespace unicorn
         void InstantiateNetworkPrint()
         {
             PlayerProfile profile = Resources.Load("PlayerProfile") as PlayerProfile;
+            DeckProfile gameDeck = Resources.Load("DeckProfile") as DeckProfile;
             object[] data = new object[1];
-            data[0] = profile.cardIds;
+            // data[0] = profile.cardIds;
+            data[0] = gameDeck.cardIds;
 
             PhotonNetwork.Instantiate("NetworkPrint", Vector3.zero, Quaternion.identity, 0, data);
         }
@@ -91,29 +93,33 @@ namespace unicorn
 
                 foreach (NetworkPrint p in players)
                 {
-                    foreach (string id in p.GetStartingCardIds())
-                    {
-                        Card card = rm.GetCardInstance(id);
-                        playerId.Add(p.photonId);
-                        cardInstId.Add(card.instId);
-                        cardName.Add(id);
+                    playerId.Add(p.photonId);
 
-                        if (p.isLocal)
-                        {
-                            p.playerHolder = gm.localPlayer;
-                            p.playerHolder.photonId = p.photonId;
-                        }
-                        else
-                        {
-                            p.playerHolder = gm.clientPlayer;
-                            p.playerHolder.photonId = p.photonId;
-                        }
+                    if (p.isLocal)
+                    {
+                        p.playerHolder = gm.localPlayer;
+                        p.playerHolder.photonId = p.photonId;
                     }
+                    else
+                    {
+                        p.playerHolder = gm.clientPlayer;
+                        p.playerHolder.photonId = p.photonId;
+                    }
+                }
+
+                foreach (string id in players[0].GetStartingCardIds())
+                {
+                    Card card = rm.GetCardInstance(id);
+                    cardInstId.Add(card.instId);
+                    cardName.Add(id);
                 }
 
                 for (int i = 0; i < playerId.Count; i++)
                 {
-                    photonView.RPC("RPC_PlayerCreatesCard", PhotonTargets.All, playerId[i], cardInstId[i], cardName[i]);
+                    for (int j = 0; j < cardInstId.Count; j++)
+                    {
+                        photonView.RPC("RPC_PlayerCreatesCard", PhotonTargets.All, playerId[i], cardInstId[j], cardName[j]);
+                    }
                 }
 
                 photonView.RPC("RPC_InitGame", PhotonTargets.All, 1);
@@ -203,8 +209,10 @@ namespace unicorn
 
             Card c = p.deckCards[0];
             p.deckCards.RemoveAt(0);
-
+            Debug.Log("attemtping to use card for player" + p.photonId);
             PlayerWantsToUseCard(c.instId, p.photonId, CardOperation.pickCardFromDeck);
+
+            PlayerWantsToUseCard(c.instId, p.photonId, CardOperation.syncDeck);
         }
 
         public void PlayerWantsToUseCard(int cardInst, int photonId, CardOperation operation)
@@ -237,7 +245,7 @@ namespace unicorn
         #region Card Operations
         public enum CardOperation
         {
-            dropMagicalUnicornType, pickCardFromDeck
+            dropMagicalUnicornType, pickCardFromDeck, syncDeck
         }
 
         [PunRPC]
@@ -262,6 +270,17 @@ namespace unicorn
                     card.cardPhysicalInst.currentLogic = dataHolder.handLogic;
                     Settings.SetParentForCard(go.transform, p.playerHolder.currentHolder.handGrid.value);
                     p.playerHolder.handCards.Add(card.cardPhysicalInst);
+                    break;
+                case CardOperation.syncDeck:
+                    Debug.Log("player" + photonId + "drew" + instId);
+                    foreach (NetworkPrint player in players)
+                    {
+                        if (player.photonId != photonId)
+                        {
+                            Debug.Log("removing" + instId + "for player" + player.photonId);
+                            player.deckCards.RemoveAt(0);
+                        }
+                    }
                     break;
                 default:
                     break;

@@ -17,20 +17,20 @@ namespace unicorn
 
         public PlayerHolder playerHolder;
 
-        Dictionary<int, Card> myCards = new Dictionary<int, Card>();
+        Dictionary<int, Card> gameCards = new Dictionary<int, Card>();
 
         public List<Card> deckCards = new List<Card>();
 
         public void AddCard(Card c)
         {
-            myCards.Add(c.instId, c);
+            gameCards.Add(c.instId, c);
             deckCards.Add(c);
         }
 
         public Card GetCard(int instId)
         {
             Card c = null;
-            myCards.TryGetValue(instId, out c);
+            gameCards.TryGetValue(instId, out c);
             return c;
         }
 

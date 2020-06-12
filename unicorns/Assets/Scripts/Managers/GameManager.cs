@@ -34,10 +34,10 @@ namespace unicorn
 
         public static GameManager singleton;
 
-        public List<string> startingDeck = new List<string>();
+        // public List<string> startingDeck = new List<string>();
 
-        [System.NonSerialized]
-        public List<string> all_cards = new List<string>();
+        // [System.NonSerialized]
+        // public List<string> all_cards = new List<string>();
 
         public void Awake()
         {
@@ -69,7 +69,7 @@ namespace unicorn
 
             // currentPlayer = turns[0].player;
 
-            all_cards.AddRange(startingDeck);
+            // all_cards.AddRange(startingDeck);
 
             SetupPlayers();
 
