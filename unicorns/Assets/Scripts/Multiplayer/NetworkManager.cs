@@ -89,7 +89,7 @@ namespace unicorn
         public void CreateRoom()
         {
             RoomOptions room = new RoomOptions();
-            room.MaxPlayers = 2;
+            room.MaxPlayers = 3;
             PhotonNetwork.CreateRoom(RandomString(256), room, TypedLobby.Default);
         }
 
@@ -179,7 +179,7 @@ namespace unicorn
         {
             if (isMaster)
             {
-                if (PhotonNetwork.playerList.Length > 1)
+                if (PhotonNetwork.playerList.Length > 2)
                 {
                     logger.value = "Ready for match";
                     loggerUpdated.Raise();

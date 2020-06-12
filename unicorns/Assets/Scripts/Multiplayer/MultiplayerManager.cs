@@ -8,6 +8,7 @@ namespace unicorn
     {
         #region Variables
         public static MultiplayerManager singleton;
+        int holderIndex = 0;
 
         Transform multiplayerReferences;
 
@@ -87,6 +88,7 @@ namespace unicorn
 
             if (NetworkManager.isMaster)
             {
+                // BTW the master is always player 1! and photon.Id determines turn order eg 1 is first, 2 second, 3 third
                 List<int> playerId = new List<int>();
                 List<int> cardInstId = new List<int>();
                 List<string> cardName = new List<string>();
@@ -95,15 +97,70 @@ namespace unicorn
                 {
                     playerId.Add(p.photonId);
 
-                    if (p.isLocal)
+                    // since this conditional parent is for network master (who is always player 1), p.photonId == 2 is never local here, only p.photonId == 1 is ever local here
+                    if (p.photonId == 2)
                     {
-                        p.playerHolder = gm.localPlayer;
-                        p.playerHolder.photonId = p.photonId;
+                        // if you're the second player and also local, that means the person after you (person after you is when holderIndex == 0) is the third player, but second player is never local here so we can technically comment this if conditional out
+                        if (p.isLocal)
+                        {
+                            // p.playerHolder = gm.localPlayer;
+                            // //set photonId for the network print of this local player to this local player's photonid
+                            // p.playerHolder.photonId = p.photonId;
+                        }
+                        else
+                        {
+                            // if youre here, that means you are the seoncd player and you are not local so the person after you (person after you is when holderIndex == 0) is the third player
+                            if (holderIndex == 0)
+                            {
+                                p.playerHolder = gm.thirdrdClient;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex++;
+                            }
+                            else
+                            {
+                                // the next player and final player here is after the third so the first player
+                                p.playerHolder = gm.localPlayer;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex = 0;
+                            }
+                        }
                     }
                     else
                     {
-                        p.playerHolder = gm.clientPlayer;
-                        p.playerHolder.photonId = p.photonId;
+                        // here, if you're not the second player and also local, that means you are the first player and the person after you is the second player 
+                        if (p.isLocal)
+                        {
+                            if (p.photonId == 1)
+                            {
+
+                            }
+                            if (p.photonId == 2)
+                            {
+
+                            }
+                            if (p.photonId == 2)
+                            {
+
+                            }
+                            p.playerHolder = gm.localPlayer;
+                            p.playerHolder.photonId = p.photonId;
+                        }
+                        else
+                        {
+                            // here, you are not the second player and you are not local, so you must be the third player. the person after you is the first player                          
+                            if (holderIndex == 0)
+                            {
+                                p.playerHolder = gm.clientPlayer;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex++;
+                            }
+                            else
+                            {
+                                p.playerHolder = gm.thirdrdClient;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex = 0;
+                            }
+                        }
                     }
                 }
 
@@ -128,15 +185,56 @@ namespace unicorn
             {
                 foreach (NetworkPrint p in players)
                 {
-                    if (p.isLocal)
+                    if (p.photonId == 2)
                     {
-                        p.playerHolder = gm.localPlayer;
-                        p.playerHolder.photonId = p.photonId;
+                        // if you're the second player and also local, that means the person after you (person after you is when holderIndex == 0) is the third player
+                        if (p.isLocal)
+                        {
+                            p.playerHolder = gm.localPlayer;
+                            //set photonId for the network print of this local player to this local player's photonid
+                            p.playerHolder.photonId = p.photonId;
+                        }
+                        else
+                        {
+                            // the person after you (person after you is when holderIndex == 0) is the third player
+                            if (holderIndex == 0)
+                            {
+                                p.playerHolder = gm.thirdrdClient;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex++;
+                            }
+                            else
+                            {
+                                p.playerHolder = gm.clientPlayer;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex = 0;
+                            }
+                        }
                     }
                     else
                     {
-                        p.playerHolder = gm.clientPlayer;
-                        p.playerHolder.photonId = p.photonId;
+                        // if you're not the second player and also local, that means the person after you is the not third player and is either the first or the second player (which are ok with being clientplayer)
+                        if (p.isLocal)
+                        {
+                            p.playerHolder = gm.localPlayer;
+                            p.playerHolder.photonId = p.photonId;
+                        }
+                        else
+                        {
+                            // the person after you is the not third player and is either the first or the second player (which are ok with being clientplayer)                           
+                            if (holderIndex == 0)
+                            {
+                                p.playerHolder = gm.clientPlayer;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex++;
+                            }
+                            else
+                            {
+                                p.playerHolder = gm.thirdrdClient;
+                                p.playerHolder.photonId = p.photonId;
+                                holderIndex = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -290,12 +388,12 @@ namespace unicorn
                     p.playerHolder.handCards.Add(card.cardPhysicalInst);
                     break;
                 case CardOperation.syncDeck:
-                    // Debug.Log("player" + photonId + "drew" + instId);
+                    Debug.Log("player" + photonId + "drew" + instId);
                     foreach (NetworkPrint player in players)
                     {
                         if (player.photonId != photonId)
                         {
-                            // Debug.Log("removing" + instId + "for player" + player.photonId);
+                            Debug.Log("removing" + instId + "for player" + player.photonId);
                             player.deckCards.RemoveAt(0);
                         }
                     }

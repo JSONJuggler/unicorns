@@ -16,7 +16,10 @@ namespace unicorn
 
         public PlayerHolder localPlayer;
         public PlayerHolder clientPlayer;
+        public PlayerHolder thirdrdClient;
+
         public CardHolders playerOneHolder;
+        public CardHolders thirdPlaye;
         public CardHolders otherPlayerHolder;
         public State currentState;
         public GameObject cardPrefab;
@@ -49,7 +52,7 @@ namespace unicorn
         public void InitGame(int startingPlayer)
         {
             all_players = new PlayerHolder[turns.Length];
-            Turn[] _turns = new Turn[2];
+            Turn[] _turns = new Turn[3];
 
             for (int i = 0; i < turns.Length; i++)
             {
@@ -59,9 +62,13 @@ namespace unicorn
                     _turns[0] = turns[i];
                     // currentPlayer = all_players[i];
                 }
-                else
+                if (all_players[i].photonId == 2)
                 {
                     _turns[1] = turns[i];
+                }
+                else
+                {
+                    _turns[2] = turns[i];
                 }
             }
 
@@ -102,9 +109,13 @@ namespace unicorn
                 {
                     all_players[i].currentHolder = playerOneHolder;
                 }
-                else
+                if (i == 1)
                 {
                     all_players[i].currentHolder = otherPlayerHolder;
+                }
+                else
+                {
+                    all_players[i].currentHolder = thirdPlaye;
                 }
 
                 all_players[i].currentHolder.LoadPlayer(all_players[i]);
@@ -198,10 +209,14 @@ namespace unicorn
             int r = turnIndex;
 
             r++;
+
             if (r > turns.Length - 1)
             {
                 r = 0;
             }
+            Debug.Log("turnindex of nextplayer is" + r + "with id of" + turns[r].player.photonId);
+
+            Debug.Log("returning next player's playerid : photon" + turns[r].player.photonId);
 
             return turns[r].player.photonId;
         }
@@ -219,8 +234,10 @@ namespace unicorn
 
         public void ChangeCurrentTurn(int photonId)
         {
+            Debug.Log("changing turn to player " + photonId);
             turnIndex = GetPlayerTurnIndex(photonId);
             currentPlayer = turns[turnIndex].player;
+            Debug.Log("current player is now " + turns[turnIndex].player + "with turnindex of" + turnIndex);
             turns[turnIndex].OnTurnStart();
             turnText.value = turns[turnIndex].player.username;
             onTurnChanged.Raise();
