@@ -245,7 +245,7 @@ namespace unicorn
         #region Card Operations
         public enum CardOperation
         {
-            dropMagicalUnicornType, pickCardFromDeck, syncDeck
+            dropMagicalUnicornType, dropMagicalUnicornTypeEnemy, pickCardFromDeck, syncDeck
         }
 
         [PunRPC]
@@ -259,6 +259,12 @@ namespace unicorn
                 case CardOperation.dropMagicalUnicornType:
                     Debug.Log("Online Player placing magical unicorn down");
                     Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.unicornAreaGrid.value, card.cardPhysicalInst);
+                    card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
+                    card.cardPhysicalInst.gameObject.SetActive(true);
+                    break;
+                case CardOperation.dropMagicalUnicornTypeEnemy:
+                    Debug.Log("Online Player placing magical unicorn down");
+                    Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.enemyUnicornAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
                     break;

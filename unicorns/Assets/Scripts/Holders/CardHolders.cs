@@ -9,6 +9,7 @@ namespace unicorn
     {
         public SO.TransformVariable handGrid;
         public SO.TransformVariable unicornAreaGrid;
+        public SO.TransformVariable enemyUnicornAreaGrid;
 
         [System.NonSerialized]
         public PlayerHolder playerHolder;

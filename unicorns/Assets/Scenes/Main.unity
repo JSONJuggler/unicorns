@@ -3356,10 +3356,6 @@ MonoBehaviour:
   turnText: {fileID: 11400000, guid: 1ca6d193303f54f2699b07063e285b44, type: 2}
   discardPile: {fileID: 11400000, guid: 0e783d00d06a04418b817d6c726737fb, type: 2}
   discardPileCards: []
-  startingDeck:
-  - Card
-  - card2
-  - Card
 --- !u!4 &972122354
 Transform:
   m_ObjectHideFlags: 0
@@ -7381,7 +7377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae17698b2e4246cf8d68b24a9bca614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logic: {fileID: 0}
+  logic: {fileID: 11400000, guid: 4a79b7a59220949c697f9c7b01330c0c, type: 2}
 --- !u!114 &2050571287
 MonoBehaviour:
   m_ObjectHideFlags: 0
