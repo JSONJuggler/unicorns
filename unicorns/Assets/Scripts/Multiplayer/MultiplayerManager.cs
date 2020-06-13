@@ -86,7 +86,6 @@ namespace unicorn
             ResourcesManager rm = gm.resourcesManager;
 
             int counter = 0;
-            int printCounter = 0;
 
             if (NetworkManager.isMaster)
             {
@@ -95,38 +94,47 @@ namespace unicorn
                 List<int> cardInstId = new List<int>();
                 List<string> cardName = new List<string>();
 
-                Debug.Log(printCounter < players.Count);
-                while (printCounter < players.Count)
+                foreach (NetworkPrint p in players)
                 {
-                    Debug.Log("players count" + players.Count);
+                    playerId.Add(p.photonId);
 
-                    Debug.Log("print counter" + printCounter);
-                    playerId.Add(players[printCounter].photonId);
-
-                    if (players[printCounter].isLocal)
+                    if (p.isLocal)
                     {
-                        players[printCounter].playerHolder = gm.localPlayer;
-                        players[printCounter].playerHolder.photonId = players[printCounter].photonId;
+                        p.playerHolder = gm.localPlayer;
+                        p.playerHolder.photonId = p.photonId;
                     }
                     else
                     {
-                        if (counter == 0)
+                        if (p.photonId != 1)
                         {
-                            players[printCounter].playerHolder = gm.clientPlayer;
-                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
-                            counter++;
-                        }
-                        else
-                        {
-                            players[printCounter].playerHolder = gm.thirdrdClient;
-                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
-                            counter = 0;
+                            Debug.Log("p is not local in the if");
+                            if (counter == 0)
+                            {
+                                Debug.Log("counter is 0");
+                                Debug.Log("setting" + p.playerHolder + "to client");
+                                p.playerHolder = gm.clientPlayer;
+
+                                if (p.playerHolder)
+                                {
+                                    p.playerHolder.photonId = p.photonId;
+                                    counter++;
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("counter is 1");
+                                Debug.Log("setting" + p.playerHolder + "to third");
+                                p.playerHolder = gm.thirdrdClient;
+
+                                if (p.playerHolder)
+                                {
+                                    p.playerHolder.photonId = p.photonId;
+                                    counter = 0;
+                                }
+                            }
                         }
                     }
-                    printCounter++;
-                    Debug.Log(printCounter < players.Count);
                 }
-                printCounter = 0;
 
                 foreach (string id in players[0].GetStartingCardIds())
                 {
@@ -147,31 +155,161 @@ namespace unicorn
             }
             else
             {
-                while (printCounter < players.Count)
+                foreach (NetworkPrint p in players)
                 {
-                    if (players[printCounter].isLocal)
+                    Debug.Log("we are player: " + p.photonId);
+
+                    if (p.isLocal)
                     {
-                        players[printCounter].playerHolder = gm.localPlayer;
-                        players[printCounter].playerHolder.photonId = players[printCounter].photonId;
-                    }
-                    else
-                    {
-                        if (counter == 0)
+                        p.playerHolder = gm.localPlayer;
+                        p.playerHolder.photonId = p.photonId;
+
+                        if (p.photonId == 1)
                         {
-                            players[printCounter].playerHolder = gm.clientPlayer;
-                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
-                            counter++;
+                            Debug.Log("player 1 was local");
+                        }
+                        if (p.photonId == 2)
+                        {
+                            Debug.Log("player 2 was local");
                         }
                         else
                         {
-                            players[printCounter].playerHolder = gm.thirdrdClient;
-                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
-                            counter = 0;
+                            Debug.Log("player 3 was local");
                         }
                     }
-                    printCounter++;
+                    else
+                    {
+                        if (p.photonId == 1)
+                        {
+                            Debug.Log("player 1 was not local");
+                        }
+                        if (p.photonId == 2)
+                        {
+                            Debug.Log("player 2 was not local");
+                        }
+                        else
+                        {
+                            Debug.Log("player 3 was not local");
+                        }
+                        // if (p.photonId == 2)
+                        // {
+                        //     Debug.Log("p is not local in the else");
+                        //     if (counter == 0)
+                        //     {
+                        //         Debug.Log("counter is 0");
+                        //         Debug.Log("setting" + p.playerHolder + "to client");
+                        //         p.playerHolder = gm.clientPlayer;
+
+                        //         if (p.playerHolder)
+                        //         {
+                        //             p.playerHolder.photonId = p.photonId;
+                        //             counter++;
+                        //         }
+                        //     }
+                        //     else
+                        //     {
+                        //         Debug.Log("counter is 1");
+                        //         Debug.Log("setting" + p.playerHolder + "to third");
+                        //         p.playerHolder = gm.thirdrdClient;
+
+                        //         if (p.playerHolder)
+                        //         {
+                        //             p.playerHolder.photonId = p.photonId;
+                        //             counter = 0;
+                        //         }
+                        //     }
+                        // }
+
+                        // if (p.photonId == 3)
+                        // {
+                        //     Debug.Log("p is not local in the else");
+                        //     if (counter == 0)
+                        //     {
+                        //         Debug.Log("counter is 0");
+                        //         Debug.Log("setting" + p.playerHolder + "to client");
+                        //         p.playerHolder = gm.clientPlayer;
+
+                        //         if (p.playerHolder)
+                        //         {
+                        //             p.playerHolder.photonId = p.photonId;
+                        //             counter++;
+                        //         }
+                        //     }
+                        //     else
+                        //     {
+                        //         Debug.Log("counter is 1");
+                        //         Debug.Log("setting" + p.playerHolder + "to third");
+                        //         p.playerHolder = gm.thirdrdClient;
+
+                        //         if (p.playerHolder)
+                        //         {
+                        //             p.playerHolder.photonId = p.photonId;
+                        //             counter = 0;
+                        //         }
+                        //     }
+                        // }
+                    }
+                    // if (p.isLocal)
+                    // {
+                    //     p.playerHolder = gm.localPlayer;
+                    //     p.playerHolder.photonId = p.photonId;
+                    // }
+                    // else
+                    // {
+                    //     if (p.photonId != 2)
+                    //     {
+                    //         Debug.Log("p." + p.photonId + " is not local in the else");
+                    //         if (counter == 0)
+                    //         {
+                    //             Debug.Log("counter is 0");
+                    //             Debug.Log("setting" + p.playerHolder + "to client");
+                    //             p.playerHolder = gm.thirdrdClient;
+                    //             if (p.playerHolder)
+                    //             {
+                    //                 p.playerHolder.photonId = p.photonId;
+                    //                 counter++;
+                    //             }
+                    //         }
+                    //         else
+                    //         {
+                    //             Debug.Log("counter is 1");
+                    //             Debug.Log("setting" + p.playerHolder + "to third");
+                    //             p.playerHolder = gm.clientPlayer;
+                    //             p.playerHolder.photonId = p.photonId;
+                    //             counter = 0;
+                    //         }
+                    //     }
+                    // }
+
+                    // if (p.isLocal)
+                    // {
+                    //     p.playerHolder = gm.localPlayer;
+                    //     p.playerHolder.photonId = p.photonId;
+                    // }
+                    // else
+                    // {
+                    //     if (p.photonId != 3)
+                    //     {
+                    //         Debug.Log("p." + p.photonId + " is not local in the else");
+                    //         if (counter == 0)
+                    //         {
+                    //             Debug.Log("counter is 0");
+                    //             Debug.Log("setting" + p.playerHolder + "to client");
+                    //             p.playerHolder = gm.clientPlayer;
+                    //             p.playerHolder.photonId = p.photonId;
+                    //             counter = 0;
+                    //         }
+                    //         else
+                    //         {
+                    //             Debug.Log("counter is 1");
+                    //             Debug.Log("setting" + p.playerHolder + "to third");
+                    //             p.playerHolder = gm.thirdrdClient;
+                    //             p.playerHolder.photonId = p.photonId;
+                    //             counter++;
+                    //         }
+                    //     }
+                    // }
                 }
-                printCounter = 0;
             }
         }
 
