@@ -155,35 +155,35 @@ namespace unicorn
                 {
                     if (p.isLocal)
                     {
-                        if (p.photonId == 2)
-                        {
-                            foreach (NetworkPrint x in players)
-                            {
-                                if (x.isLocal)
-                                {
-                                    x.playerHolder = gm.localPlayer;
-                                    x.playerHolder.photonId = x.photonId;
-                                }
-                                else
-                                {
-                                    if (x.photonId != 2)
-                                    {
-                                        x.playerHolder = gm.clientPlayer;
-                                        x.playerHolder.photonId = x.photonId;
-                                        counter++;
-                                    }
-                                    if (x.photonId != 3)
-                                    {
-                                        if (counter == 1)
-                                        {
-                                            x.playerHolder = gm.thirdrdClient;
-                                            x.playerHolder.photonId = x.photonId;
-                                        }
-                                        counter = 0;
-                                    }
-                                }
-                            }
-                        }
+                        // if (p.photonId == 2)
+                        // {
+                        //     foreach (NetworkPrint x in players)
+                        //     {
+                        //         if (x.isLocal)
+                        //         {
+                        //             x.playerHolder = gm.localPlayer;
+                        //             x.playerHolder.photonId = x.photonId;
+                        //         }
+                        //         else
+                        //         {
+                        //             if (x.photonId != 2)
+                        //             {
+                        //                 x.playerHolder = gm.clientPlayer;
+                        //                 x.playerHolder.photonId = x.photonId;
+                        //                 counter++;
+                        //             }
+                        //             if (x.photonId != 3)
+                        //             {
+                        //                 if (counter == 1)
+                        //                 {
+                        //                     x.playerHolder = gm.thirdrdClient;
+                        //                     x.playerHolder.photonId = x.photonId;
+                        //                 }
+                        //                 counter = 0;
+                        //             }
+                        //         }
+                        //     }
+                        // }
 
                         if (p.photonId == 3)
                         {
@@ -286,7 +286,7 @@ namespace unicorn
 
             Card c = p.deckCards[0];
             p.deckCards.RemoveAt(0);
-            Debug.Log("attemtping to use card for player" + p.photonId);
+            // Debug.Log("attemtping to use card for player" + p.photonId);
             PlayerWantsToUseCard(c.instId, p.photonId, CardOperation.pickCardFromDeck);
 
             PlayerWantsToUseCard(c.instId, p.photonId, CardOperation.syncDeck);
@@ -334,25 +334,25 @@ namespace unicorn
             switch (operation)
             {
                 case CardOperation.dropStableType:
-                    Debug.Log("Online Player placing stable down");
+                    // Debug.Log("Online Player placing stable down");
                     Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.stableAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
                     break;
                 case CardOperation.dropStableTypeEnemy:
-                    Debug.Log("Online Player placing enemy stable down");
+                    // Debug.Log("Online Player placing enemy stable down");
                     Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.enemyStableAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
                     break;
                 case CardOperation.dropMagicalUnicornType:
-                    Debug.Log("Online Player placing unicorn down");
+                    // Debug.Log("Online Player placing unicorn down");
                     Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.unicornAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
                     break;
                 case CardOperation.dropMagicalUnicornTypeEnemy:
-                    Debug.Log("Online Player placing enemy unicorn down");
+                    // Debug.Log("Online Player placing enemy unicorn down");
                     Settings.DropCard(card.cardPhysicalInst.transform, p.playerHolder.currentHolder.enemyUnicornAreaGrid.value, card.cardPhysicalInst);
                     card.cardPhysicalInst.currentLogic = dataHolder.cardDownLogic;
                     card.cardPhysicalInst.gameObject.SetActive(true);
@@ -372,6 +372,7 @@ namespace unicorn
                     {
                         if (player.photonId != photonId)
                         {
+                            Debug.Log(player);
                             Debug.Log("removing" + instId + "for player" + player.photonId);
                             player.deckCards.RemoveAt(0);
                         }
