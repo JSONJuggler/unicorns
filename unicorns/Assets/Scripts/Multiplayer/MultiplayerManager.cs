@@ -85,6 +85,9 @@ namespace unicorn
         {
             ResourcesManager rm = gm.resourcesManager;
 
+            int counter = 0;
+            int printCounter = 0;
+
             if (NetworkManager.isMaster)
             {
                 // BTW the master is always player 1! and photon.Id determines turn order eg 1 is first, 2 second, 3 third
@@ -92,98 +95,40 @@ namespace unicorn
                 List<int> cardInstId = new List<int>();
                 List<string> cardName = new List<string>();
 
-                //treat this as the case for where local player is photon.Id == 1, aka network manager master aka room creator. all other local player conditionals will be handled in else statement
-                foreach (NetworkPrint p in players)
+                Debug.Log(printCounter < players.Count);
+                while (printCounter < players.Count)
                 {
-                    playerId.Add(p.photonId);
+                    Debug.Log("players count" + players.Count);
 
-                    // conditional for if network print one is local
-                    if (p.photonId == 1)
+                    Debug.Log("print counter" + printCounter);
+                    playerId.Add(players[printCounter].photonId);
+
+                    if (players[printCounter].isLocal)
                     {
-                        //turn order from the perspective of this local player 1->2->3 where 1 is local, 2 is client, and 3 is 3rd client
-                        foreach (NetworkPrint z in players)
-                        {
-                            if (z.photonId == 1)
-                            {
-                                // here, first networkprint is local
-                                z.playerHolder = gm.localPlayer;
-                                z.playerHolder.photonId = z.photonId;
-
-                            }
-                            if (z.photonId == 2)
-                            {
-                                // here, second networkprint is client (second)
-                                z.playerHolder = gm.clientPlayer;
-                                z.playerHolder.photonId = z.photonId;
-
-                            }
-                            if (z.photonId == 3)
-                            {
-                                // here, third networkprint is third
-                                z.playerHolder = gm.thirdrdClient;
-                                z.playerHolder.photonId = z.photonId;
-                            }
-                        }
+                        players[printCounter].playerHolder = gm.localPlayer;
+                        players[printCounter].playerHolder.photonId = players[printCounter].photonId;
                     }
-
-                    // // conditional for if network print two is local
-                    // if (p.photonId == 2)
-                    // {
-                    //     //turn order from the perspective of this local player 2->3->1 where 2 is local, 3 is client, and 1 is 3rd client
-                    //     foreach (NetworkPrint x in players)
-                    //     {
-                    //         if (x.photonId == 1)
-                    //         {
-                    //             // here, first networkprint is third
-                    //             x.playerHolder = gm.thirdrdClient;
-                    //             x.playerHolder.photonId = x.photonId;
-
-                    //         }
-                    //         if (x.photonId == 2)
-                    //         {
-                    //             // here, second networkprint is local
-                    //             x.playerHolder = gm.localPlayer;
-                    //             x.playerHolder.photonId = x.photonId;
-
-                    //         }
-                    //         if (x.photonId == 3)
-                    //         {
-                    //             // here, third networkprint is client (second)
-                    //             x.playerHolder = gm.clientPlayer;
-                    //             x.playerHolder.photonId = x.photonId;
-                    //         }
-                    //     }
-                    // }
-
-                    // // conditional for if networkprint three is local
-                    // if (p.photonId == 3)
-                    // {
-                    //     //turn order from the perspective of this local player 3->1->2 where 3 is local, 1 is client, and 2 is 3rd client
-                    //     foreach (NetworkPrint y in players)
-                    //     {
-                    //         if (y.photonId == 1)
-                    //         {
-                    //             // here, first networkprint is client (second)
-                    //             y.playerHolder = gm.clientPlayer;
-                    //             y.playerHolder.photonId = y.photonId;
-
-                    //         }
-                    //         if (y.photonId == 2)
-                    //         {
-                    //             // here, second networkprint is third 
-                    //             y.playerHolder = gm.thirdrdClient;
-                    //             y.playerHolder.photonId = y.photonId;
-
-                    //         }
-                    //         if (y.photonId == 3)
-                    //         {
-                    //             // here, third networkprint is local
-                    //             y.playerHolder = gm.localPlayer;
-                    //             y.playerHolder.photonId = y.photonId;
-                    //         }
-                    //     }
-                    // }
+                    else
+                    {
+                        if (counter == 0)
+                        {
+                            players[printCounter].playerHolder = gm.clientPlayer;
+                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
+                            return;
+                        }
+                        if (counter == 1)
+                        {
+                            players[printCounter].playerHolder = gm.thirdrdClient;
+                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
+                            counter = 0;
+                            return;
+                        }
+                        counter++;
+                    }
+                    printCounter++;
+                    Debug.Log(printCounter < players.Count);
                 }
+                printCounter = 0;
 
                 foreach (string id in players[0].GetStartingCardIds())
                 {
@@ -204,103 +149,31 @@ namespace unicorn
             }
             else
             {
-                //handle all other local player conditionals here in this else statement
-                foreach (NetworkPrint p in players)
+                while (printCounter < players.Count)
                 {
-                    // conditional for if network print one is local
-                    // if (p.photonId == 1)
-                    // {
-                    //     //turn order from the perspective of this local player 1->2->3 where 1 is local, 2 is client, and 3 is 3rd client
-                    //     foreach (NetworkPrint z in players)
-                    //     {
-                    //         if (z.photonId == 1)
-                    //         {
-                    //             // here, first networkprint is local
-                    //             z.playerHolder = gm.localPlayer;
-                    //             z.playerHolder.photonId = z.photonId;
-
-                    //         }
-                    //         if (z.photonId == 2)
-                    //         {
-                    //             // here, second networkprint is client (second)
-                    //             z.playerHolder = gm.clientPlayer;
-                    //             z.playerHolder.photonId = z.photonId;
-
-                    //         }
-                    //         if (z.photonId == 3)
-                    //         {
-                    //             // here, third networkprint is third
-                    //             z.playerHolder = gm.thirdrdClient;
-                    //             z.playerHolder.photonId = z.photonId;
-                    //         }
-                    //     }
-                    // }
-
-                    // conditional for if network print two is local
-                    if (p.photonId == 2)
+                    if (players[printCounter].isLocal)
                     {
-                        if (p.isLocal)
-                        {
-                            //turn order from the perspective of this local player 2->3->1 where 2 is local, 3 is client, and 1 is 3rd client
-                            foreach (NetworkPrint x in players)
-                            {
-                                if (x.photonId == 1)
-                                {
-                                    // here, first networkprint is third
-                                    x.playerHolder = gm.thirdrdClient;
-                                    x.playerHolder.photonId = x.photonId;
-
-                                }
-                                if (x.photonId == 2)
-                                {
-                                    // here, second networkprint is local
-                                    x.playerHolder = gm.localPlayer;
-                                    x.playerHolder.photonId = x.photonId;
-
-                                }
-                                if (x.photonId == 3)
-                                {
-                                    // here, third networkprint is client (second)
-                                    x.playerHolder = gm.clientPlayer;
-                                    x.playerHolder.photonId = x.photonId;
-                                }
-                            }
-                        }
+                        players[printCounter].playerHolder = gm.localPlayer;
+                        players[printCounter].playerHolder.photonId = players[printCounter].photonId;
                     }
-
-
-                    // conditional for if networkprint three is local
-                    if (p.photonId == 3)
+                    else
                     {
-                        if (p.isLocal)
+                        if (counter == 0)
                         {
-                            //turn order from the perspective of this local player 3->1->2 where 3 is local, 1 is client, and 2 is 3rd client
-                            foreach (NetworkPrint y in players)
-                            {
-                                if (y.photonId == 1)
-                                {
-                                    // here, first networkprint is client (second)
-                                    y.playerHolder = gm.clientPlayer;
-                                    y.playerHolder.photonId = y.photonId;
-
-                                }
-                                if (y.photonId == 2)
-                                {
-                                    // here, second networkprint is third 
-                                    y.playerHolder = gm.thirdrdClient;
-                                    y.playerHolder.photonId = y.photonId;
-
-                                }
-                                if (y.photonId == 3)
-                                {
-                                    // here, third networkprint is local
-                                    y.playerHolder = gm.localPlayer;
-                                    y.playerHolder.photonId = y.photonId;
-                                }
-                            }
+                            players[printCounter].playerHolder = gm.clientPlayer;
+                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
                         }
+                        if (counter == 1)
+                        {
+                            players[printCounter].playerHolder = gm.thirdrdClient;
+                            players[printCounter].playerHolder.photonId = players[printCounter].photonId;
+                            counter = 0;
+                        }
+                        counter++;
                     }
+                    printCounter++;
                 }
+                printCounter = 0;
             }
         }
 
