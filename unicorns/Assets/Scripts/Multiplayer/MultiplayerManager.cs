@@ -86,6 +86,7 @@ namespace unicorn
             ResourcesManager rm = gm.resourcesManager;
 
             int counter = 0;
+            int counterTwo = 0;
 
             if (NetworkManager.isMaster)
             {
@@ -107,11 +108,8 @@ namespace unicorn
                     {
                         if (p.photonId != 1)
                         {
-                            Debug.Log("p is not local in the if");
                             if (counter == 0)
                             {
-                                Debug.Log("counter is 0");
-                                Debug.Log("setting" + p.playerHolder + "to client");
                                 p.playerHolder = gm.clientPlayer;
 
                                 if (p.playerHolder)
@@ -122,8 +120,6 @@ namespace unicorn
                             }
                             else
                             {
-                                Debug.Log("counter is 1");
-                                Debug.Log("setting" + p.playerHolder + "to third");
                                 p.playerHolder = gm.thirdrdClient;
 
                                 if (p.playerHolder)
@@ -157,158 +153,68 @@ namespace unicorn
             {
                 foreach (NetworkPrint p in players)
                 {
-                    Debug.Log("we are player: " + p.photonId);
-
                     if (p.isLocal)
                     {
-                        p.playerHolder = gm.localPlayer;
-                        p.playerHolder.photonId = p.photonId;
-
-                        if (p.photonId == 1)
-                        {
-                            Debug.Log("player 1 was local");
-                        }
                         if (p.photonId == 2)
                         {
-                            Debug.Log("player 2 was local");
+                            foreach (NetworkPrint x in players)
+                            {
+                                if (x.isLocal)
+                                {
+                                    x.playerHolder = gm.localPlayer;
+                                    x.playerHolder.photonId = x.photonId;
+                                }
+                                else
+                                {
+                                    if (x.photonId != 2)
+                                    {
+                                        x.playerHolder = gm.clientPlayer;
+                                        x.playerHolder.photonId = x.photonId;
+                                        counter++;
+                                    }
+                                    if (x.photonId != 3)
+                                    {
+                                        if (counter == 1)
+                                        {
+                                            x.playerHolder = gm.thirdrdClient;
+                                            x.playerHolder.photonId = x.photonId;
+                                        }
+                                        counter = 0;
+                                    }
+                                }
+                            }
                         }
-                        else
+
+                        if (p.photonId == 3)
                         {
-                            Debug.Log("player 3 was local");
+                            foreach (NetworkPrint x in players)
+                            {
+                                if (x.isLocal)
+                                {
+                                    x.playerHolder = gm.localPlayer;
+                                    x.playerHolder.photonId = x.photonId;
+                                }
+                                else
+                                {
+                                    if (x.photonId != 1)
+                                    {
+                                        if (counterTwo == 1)
+                                        {
+                                            x.playerHolder = gm.thirdrdClient;
+                                            x.playerHolder.photonId = x.photonId;
+                                            counterTwo = 0;
+                                        }
+                                    }
+                                    if (x.photonId != 2)
+                                    {
+                                        x.playerHolder = gm.clientPlayer;
+                                        x.playerHolder.photonId = x.photonId;
+                                        counterTwo++;
+                                    }
+                                }
+                            }
                         }
                     }
-                    else
-                    {
-                        if (p.photonId == 1)
-                        {
-                            Debug.Log("player 1 was not local");
-                        }
-                        if (p.photonId == 2)
-                        {
-                            Debug.Log("player 2 was not local");
-                        }
-                        else
-                        {
-                            Debug.Log("player 3 was not local");
-                        }
-                        // if (p.photonId == 2)
-                        // {
-                        //     Debug.Log("p is not local in the else");
-                        //     if (counter == 0)
-                        //     {
-                        //         Debug.Log("counter is 0");
-                        //         Debug.Log("setting" + p.playerHolder + "to client");
-                        //         p.playerHolder = gm.clientPlayer;
-
-                        //         if (p.playerHolder)
-                        //         {
-                        //             p.playerHolder.photonId = p.photonId;
-                        //             counter++;
-                        //         }
-                        //     }
-                        //     else
-                        //     {
-                        //         Debug.Log("counter is 1");
-                        //         Debug.Log("setting" + p.playerHolder + "to third");
-                        //         p.playerHolder = gm.thirdrdClient;
-
-                        //         if (p.playerHolder)
-                        //         {
-                        //             p.playerHolder.photonId = p.photonId;
-                        //             counter = 0;
-                        //         }
-                        //     }
-                        // }
-
-                        // if (p.photonId == 3)
-                        // {
-                        //     Debug.Log("p is not local in the else");
-                        //     if (counter == 0)
-                        //     {
-                        //         Debug.Log("counter is 0");
-                        //         Debug.Log("setting" + p.playerHolder + "to client");
-                        //         p.playerHolder = gm.clientPlayer;
-
-                        //         if (p.playerHolder)
-                        //         {
-                        //             p.playerHolder.photonId = p.photonId;
-                        //             counter++;
-                        //         }
-                        //     }
-                        //     else
-                        //     {
-                        //         Debug.Log("counter is 1");
-                        //         Debug.Log("setting" + p.playerHolder + "to third");
-                        //         p.playerHolder = gm.thirdrdClient;
-
-                        //         if (p.playerHolder)
-                        //         {
-                        //             p.playerHolder.photonId = p.photonId;
-                        //             counter = 0;
-                        //         }
-                        //     }
-                        // }
-                    }
-                    // if (p.isLocal)
-                    // {
-                    //     p.playerHolder = gm.localPlayer;
-                    //     p.playerHolder.photonId = p.photonId;
-                    // }
-                    // else
-                    // {
-                    //     if (p.photonId != 2)
-                    //     {
-                    //         Debug.Log("p." + p.photonId + " is not local in the else");
-                    //         if (counter == 0)
-                    //         {
-                    //             Debug.Log("counter is 0");
-                    //             Debug.Log("setting" + p.playerHolder + "to client");
-                    //             p.playerHolder = gm.thirdrdClient;
-                    //             if (p.playerHolder)
-                    //             {
-                    //                 p.playerHolder.photonId = p.photonId;
-                    //                 counter++;
-                    //             }
-                    //         }
-                    //         else
-                    //         {
-                    //             Debug.Log("counter is 1");
-                    //             Debug.Log("setting" + p.playerHolder + "to third");
-                    //             p.playerHolder = gm.clientPlayer;
-                    //             p.playerHolder.photonId = p.photonId;
-                    //             counter = 0;
-                    //         }
-                    //     }
-                    // }
-
-                    // if (p.isLocal)
-                    // {
-                    //     p.playerHolder = gm.localPlayer;
-                    //     p.playerHolder.photonId = p.photonId;
-                    // }
-                    // else
-                    // {
-                    //     if (p.photonId != 3)
-                    //     {
-                    //         Debug.Log("p." + p.photonId + " is not local in the else");
-                    //         if (counter == 0)
-                    //         {
-                    //             Debug.Log("counter is 0");
-                    //             Debug.Log("setting" + p.playerHolder + "to client");
-                    //             p.playerHolder = gm.clientPlayer;
-                    //             p.playerHolder.photonId = p.photonId;
-                    //             counter = 0;
-                    //         }
-                    //         else
-                    //         {
-                    //             Debug.Log("counter is 1");
-                    //             Debug.Log("setting" + p.playerHolder + "to third");
-                    //             p.playerHolder = gm.thirdrdClient;
-                    //             p.playerHolder.photonId = p.photonId;
-                    //             counter++;
-                    //         }
-                    //     }
-                    // }
                 }
             }
         }
