@@ -114,16 +114,14 @@ namespace unicorn
                         {
                             players[printCounter].playerHolder = gm.clientPlayer;
                             players[printCounter].playerHolder.photonId = players[printCounter].photonId;
-                            return;
+                            counter++;
                         }
-                        if (counter == 1)
+                        else
                         {
                             players[printCounter].playerHolder = gm.thirdrdClient;
                             players[printCounter].playerHolder.photonId = players[printCounter].photonId;
                             counter = 0;
-                            return;
                         }
-                        counter++;
                     }
                     printCounter++;
                     Debug.Log(printCounter < players.Count);
@@ -162,14 +160,14 @@ namespace unicorn
                         {
                             players[printCounter].playerHolder = gm.clientPlayer;
                             players[printCounter].playerHolder.photonId = players[printCounter].photonId;
+                            counter++;
                         }
-                        if (counter == 1)
+                        else
                         {
                             players[printCounter].playerHolder = gm.thirdrdClient;
                             players[printCounter].playerHolder.photonId = players[printCounter].photonId;
                             counter = 0;
                         }
-                        counter++;
                     }
                     printCounter++;
                 }
