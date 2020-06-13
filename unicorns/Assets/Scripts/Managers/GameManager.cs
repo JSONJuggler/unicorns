@@ -60,15 +60,14 @@ namespace unicorn
                 if (all_players[i].photonId == startingPlayer)
                 {
                     _turns[0] = turns[i];
-                    // currentPlayer = all_players[i];
-                }
-                if (all_players[i].photonId == 2)
-                {
-                    _turns[1] = turns[i];
-                }
-                else
-                {
-                    _turns[2] = turns[i];
+                    for (int j = i; j < turns.Length - 1; j++)
+                    {
+                        _turns[1 + j - i] = turns[j + 1];
+                    }
+                    for (int j = 0; j < i; j++)
+                    {
+                        _turns[turns.Length - i + j] = turns[j];
+                    }
                 }
             }
 
