@@ -155,35 +155,41 @@ namespace unicorn
                 {
                     if (p.isLocal)
                     {
-                        // if (p.photonId == 2)
-                        // {
-                        //     foreach (NetworkPrint x in players)
-                        //     {
-                        //         if (x.isLocal)
-                        //         {
-                        //             x.playerHolder = gm.localPlayer;
-                        //             x.playerHolder.photonId = x.photonId;
-                        //         }
-                        //         else
-                        //         {
-                        //             if (x.photonId != 2)
-                        //             {
-                        //                 x.playerHolder = gm.clientPlayer;
-                        //                 x.playerHolder.photonId = x.photonId;
-                        //                 counter++;
-                        //             }
-                        //             if (x.photonId != 3)
-                        //             {
-                        //                 if (counter == 1)
-                        //                 {
-                        //                     x.playerHolder = gm.thirdrdClient;
-                        //                     x.playerHolder.photonId = x.photonId;
-                        //                 }
-                        //                 counter = 0;
-                        //             }
-                        //         }
-                        //     }
-                        // }
+                        if (p.photonId == 2)
+                        {
+                            foreach (NetworkPrint x in players)
+                            {
+                                if (x.isLocal)
+                                {
+                                    x.playerHolder = gm.localPlayer;
+                                    x.playerHolder.photonId = x.photonId;
+                                }
+                                else
+                                {
+                                    if (x.photonId != 1)
+                                    {
+                                        Debug.Log("1");
+                                    }
+                                    if (x.photonId != 2)
+                                    {
+                                        Debug.Log("2");
+                                        x.playerHolder = gm.clientPlayer;
+                                        x.playerHolder.photonId = x.photonId;
+                                        counter++;
+                                    }
+                                    if (x.photonId != 3)
+                                    {
+                                        Debug.Log("3");
+                                        if (counter == 1)
+                                        {
+                                            x.playerHolder = gm.thirdrdClient;
+                                            x.playerHolder.photonId = x.photonId;
+                                        }
+                                        counter = 0;
+                                    }
+                                }
+                            }
+                        }
 
                         if (p.photonId == 3)
                         {
